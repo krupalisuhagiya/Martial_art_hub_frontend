@@ -1,0 +1,30 @@
+.student_classheader {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.Student_class {
+  margin-top: 25px;
+}
+.student_classes1 {
+  text-decoration: none;
+  border: 1px solid #aeaeae;
+  color: black;
+  padding: 7px 13px;
+  margin-left: 10px;
+  border-radius: 9999px;
+}
+@media(max-width:576px)
+{
+  .student_classes1{
+    font-size: 13px;
+    padding: 5px 10px;
+    margin-top: 10px;
+  }
+}
+
+.opetion_class {
+  background-color: #6b6b6b;
+  color: white; /* Optional: Ensure text is readable on red background */
+}
+
+/* ------------------- */

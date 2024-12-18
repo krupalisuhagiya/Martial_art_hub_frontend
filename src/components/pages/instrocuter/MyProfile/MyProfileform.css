@@ -1,0 +1,312 @@
+/* ------------------------------------col-md-3----------------------- */
+.imgcol {
+  margin-left: 53px;
+}
+.instuctor_profile_img {
+  border-radius: 18px;
+  width: 88%;
+}
+.instuctor_profile_div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+}
+@media (max-width: 884px) {
+  .instuctor_profile_img {
+    width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  .instuctor_profile_img {
+    width: 30%;
+  }
+}
+@media (max-width: 1099px) {
+  .imgcol {
+    margin-left: 20px;
+  }
+}
+.instuctor_profile_h2 {
+  font-weight: 700;
+  margin-top: 10px;
+  font-size: 30px;
+}
+@media (min-width: 839px) and (max-width: 1165px) {
+  .instuctor_profile_h2 {
+    font-size: 22px;
+  }
+}
+@media (min-width: 767px) and (max-width: 839px) {
+  .instuctor_profile_h2 {
+    font-size: 16px;
+  }
+  .instuctor_profile_star_span span {
+    font-size: 12px;
+  }
+}
+.instuctor_profile_h2 span {
+  font-size: 15px;
+  font-weight: 200;
+  margin-left: 5px;
+}
+.instuctor_profile_star {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+@media (min-width: 767px) and (max-width: 839px) {
+  .instuctor_profile_star_span span {
+    font-size: 14px;
+  }
+}
+.instuctor_profile_star_span {
+  color: #ffb423;
+  margin-top: -16px;
+}
+.instuctor_profile_star_span span:last-of-type {
+  color: #bcbcbc;
+}
+.instuctor_profile_reviews p {
+  font-size: 12px;
+  margin-top: 8px;
+  margin-left: 5px;
+}
+.instuctor_profile_button button {
+  width: 90px;
+  height: 43px;
+  border-radius: 99999px;
+  padding: 7px;
+}
+.instuctor_profile_button {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  white-space: nowrap;
+}
+.instuctor_profile_edit {
+  background-color: transparent;
+  border: 2px solid black;
+}
+.instuctor_profile_share {
+  background-color: #cb3530;
+  margin-left: 10px;
+  border: none;
+  color: white;
+}
+/* ------------------------------------menu------------------------------- */
+.navbaratagmenu {
+  display: block;
+  margin-top: 43px;
+  border: 1px solid;
+  border-radius: 15px;
+  width: 88%;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+  padding: 0 15px;
+}
+
+.navbaratagmenu .nav-link {
+  position: relative;
+  text-decoration: none;
+  color: #333;
+  font-weight: normal;
+  padding: 13px 0;
+  transition: all 0.3s ease-in-out;
+  border-bottom: 1px solid;
+  margin: 0 auto;
+}
+.navbaratagmenu .nav-link:last-of-type {
+  border-bottom: none;
+}
+@media (min-width: 767px) and (max-width: 898px) {
+  .navbaratagmenu .nav-link {
+    padding: 15px 0 !important;
+    font-size: 15px;
+  }
+  .navbaratagmenu {
+    width: 100%;
+  }
+}
+.navbaratagmenu .nav-link.active {
+  font-weight: bold;
+}
+.navbaratagmenu .nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 8px;
+  transform: translateY(-50%);
+  /* width: 100%; */
+  height: 2px;
+  background-color: black;
+}
+
+/* ------------------------------------------------------------------------ */
+@media (max-width: 767px) {
+  .imgcol {
+    margin: 0;
+  }
+  .instuctor_profile_button {
+    display: flex;
+    justify-content: center;
+  }
+  .instuctor_profile_imgcol {
+    text-align: center;
+  }
+  .instuctor_profile_star {
+    display: flex;
+    justify-content: center;
+  }
+  .navbaratagmenu {
+    text-align: center;
+    max-width: 247px;
+    margin: 20px auto;
+  }
+  .instuctor_profile_div {
+    display: flex;
+    justify-content: center;
+  }
+}
+/* --------------------------------------------col-md-9---------------------- */
+.instuctore_profile_fourbutton button {
+  border-radius: 9999px;
+  padding: 8px 15px;
+  background-color: transparent;
+  border: 1px solid grey;
+  margin-right: 10px;
+}
+@media (max-width: 453px) {
+  .instuctore_profile_fourbutton button {
+    margin-top: 15px;
+  }
+}
+.instuctore_profile_details {
+  margin-top: 20px;
+}
+@media (min-width: 992px) {
+  .instuctore_profile_details h1 {
+    width: 641px;
+  }
+  .instuctore_profile_details1 p {
+    max-width: 715px;
+  }
+}
+.instuctore_profile_details h1 {
+  font-weight: 700;
+  font-size: 36px;
+}
+@media (max-width: 767px) {
+  .div-col9 {
+    margin-top: 35px;
+  }
+}
+.instuctore_profile_details1 {
+  background-color: #c6c4bd;
+  border-radius: 20px;
+  padding: 20px 32px;
+  margin-top: 35px;
+  width: 96%;
+}
+.instuctore_profile_details1 p {
+  font-size: 18px;
+}
+.instuctore_profile_about {
+  margin-top: 45px;
+  width: 93%;
+}
+.instuctore_profile_about_button {
+  margin-top: 15px;
+}
+.instuctore_profile_about_button button {
+  padding: 5px 18px;
+  background: transparent;
+  border-radius: 9999px;
+  margin-right: 15px;
+}
+.statusOnline {
+  font-size: 21px;
+}
+.instuctore_profile_class {
+  margin-top: 40px;
+}
+.instuctore_profile_class p {
+  margin-top: 15px;
+}
+
+@media (max-width: 453px) {
+  .instuctore_profile_about_button button {
+    margin-top: 15px;
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+}
+.VerifiedBadgeFill {
+  font-size: 21px;
+  color: #717171;
+  margin-right: 5px;
+}
+.instructor_experience {
+  margin-top: 40px;
+}
+.instructor_experience_div {
+  margin-top: 15px;
+}
+.instructor_certifications {
+  display: flex;
+}
+@media (max-width: 809px) {
+  .instructor_certifications {
+    display: block;
+  }
+  .certification_s {
+    padding: 0 !important;
+  }
+  .instructor_hourlyrates{
+    display: block !important;
+  }
+}
+@media (max-width: 951px) {
+  .instructor_hourly_rates_div {
+    line-height: normal !important;
+  }
+}
+.certification_s {
+  padding-left: 50px;
+}
+.instructor_certifications_div {
+  margin-top: 43px;
+}
+.instructor_hourly_rates {
+  margin-top: 28px;
+}
+.instructor_hourlyrates {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.instructor_hourly_rates_div {
+  line-height: 0;
+}
+.instructor_rates_p {
+  color: #cb3530;
+}
+.VerifiedBadgeFill_rates {
+  color: #cb3530;
+  font-size: 19px;
+  margin-right: 5px;
+}
+.instructor_details_p {
+  margin-left: 24px;
+}
+.instructor_training {
+  margin-top: 40px;
+}
+.instructor_training_div {
+  margin-top: 20px;
+}
+.instructor_getin {
+  margin-top: 50px;
+}

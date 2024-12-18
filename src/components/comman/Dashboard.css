@@ -1,0 +1,19 @@
+.dashhead .nav-link{
+    color: rgb(168, 166, 166);
+    text-decoration: none;
+    padding-right: 40px !important;
+}
+.dashhead .nav-link.active::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 53px;
+    transform: translateX(-50%);
+    width: 95px;
+    height: 4px;
+    background-color: white;
+}
+/* .dashhead{
+    height: 3px;
+} */
+/* ----------------------------------------------------- */

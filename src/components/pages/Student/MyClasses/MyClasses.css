@@ -1,0 +1,72 @@
+.student_classes_Upcoming {
+  padding-top: 150px;
+}
+.student_upcoming_classes1 {
+  display: flex;
+}
+@media (max-width: 576px) {
+  .student_upcoming_classes1 {
+    display: block;
+  }
+}
+.class_student_img {
+  width: 125px;
+  height: 85px;
+  border-radius: 13px;
+}
+.student_upcoming_date_ {
+  display: flex;
+}
+@media (max-width: 576px) {
+  .student_upcoming_date_ {
+    display: block;
+  }
+  .student_upcoming_point {
+    display: none;
+  }
+  .student_upcoming_classes2{
+    text-align: center;
+  }
+}
+.student_upcoming_classes2 {
+  padding:0 20px;
+  max-width: 1400px;
+  margin: 40px auto;
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 767px) {
+  .student_upcoming_classes2 {
+    display: block;
+  }
+}
+.student_upcoming_title {
+  margin-left: 15px;
+  line-height: 11px;
+}
+.student_upcoming_title span {
+  font-weight: 500;
+  color: #4a4848;
+}
+.student_upcoming_title p {
+  color: #646363;
+  font-size: 15px;
+}
+.student_upcoming_point {
+  margin-top: -10px;
+  font-size: 35px;
+  padding: 0 4px;
+}
+.student_class_joinbutton button {
+  border-radius: 9999px;
+  padding: 9px 15px;
+  background-color: #ababab;
+  border: none;
+  color: white;
+  font-size: 14px;
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .student_class_joinbutton button {
+    margin-left: 143px !important;
+  }
+}

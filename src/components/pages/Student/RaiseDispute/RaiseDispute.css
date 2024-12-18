@@ -1,0 +1,52 @@
+.student_raiseheader {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 150px;
+}
+.student_dispute_table {
+  width: 100%;
+  border-radius: 13px 13px 0 0 !important;
+  margin-top: 20px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid rgb(194, 193, 193);
+  border-radius: 10px;
+  overflow: hidden;
+  border-bottom: none;
+}
+.student_dispute_table thead {
+  background-color: #d2cfc9;
+}
+.student_dispute_table thead th {
+  padding: 10px 18px;
+  color: rgb(121, 120, 120);
+  font-weight: 600;
+}
+.student_dispute_tbody td {
+  border-bottom: 1px solid rgb(194, 193, 193);
+  padding: 10px 18px;
+}
+.student_dispute_morebutton button{
+  width: 140px;
+  border-radius: 9999px;
+  background-color: #ababab;
+  color: white;
+  border: none;
+  padding: 8px 0;
+}
+.student_dispute_createbutton{
+  text-align: end;
+  margin-top: 5%;
+
+}
+.student_dispute_createbutton button{
+  background-color: black;
+  color: white;
+  border-radius: 999px;
+  padding: 8px 15px;
+}
+/* -------------- */
+.student_dispute_table_wrapper {
+  max-height: 300px; /* Set the desired height for the table content */
+  overflow-y: auto; /* Enable vertical scrolling */
+}

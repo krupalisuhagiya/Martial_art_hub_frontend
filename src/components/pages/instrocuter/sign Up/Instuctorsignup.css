@@ -1,0 +1,28 @@
+.eye1 {
+  width: 5%;
+  display: inline;
+  vertical-align: middle;
+  position: absolute;
+  left: 88%;
+  margin-top: 21px;
+  filter: grayscale(1);
+}
+.popup0 {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.login-model{
+    margin: 10px;
+}
+#welcome1{
+    margin-top: 50px;
+}
+#welcome1 img{
+    height: 669px;
+}
+#tobtn{
+    margin-top: 1.75rem;
+}
+.form-arrow{
+  cursor: pointer;
+}

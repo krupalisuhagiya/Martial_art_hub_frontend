@@ -1,0 +1,181 @@
+.student_invoice {
+  padding-top: 110px;
+}
+.student_upcoming_classes1 {
+  display: flex;
+}
+@media (max-width: 576px) {
+  .student_upcoming_classes1 {
+    display: block;
+  }
+}
+.class_student_img {
+  width: 125px;
+  height: 85px;
+  border-radius: 13px;
+}
+@media (max-width: 576px) {
+  .student_upcoming_point {
+    display: none;
+  }
+  .student_upcoming_classes2 {
+    text-align: center;
+  }
+}
+.student_upcoming_classes2 {
+  padding: 0 20px;
+  max-width: 1400px;
+  margin: 40px auto;
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 767px) {
+  .student_upcoming_classes2 {
+    display: block;
+  }
+}
+.student_upcoming_title {
+  margin-left: 15px;
+  line-height: 11px;
+}
+.student_upcoming_title span {
+  font-weight: 500;
+  color: #4a4848;
+}
+.student_upcoming_title p {
+  color: #646363;
+  font-size: 15px;
+}
+.student_upcoming_point {
+  margin-top: -10px;
+  font-size: 35px;
+  padding: 0 4px;
+}
+.student_invoice_button button {
+  border-radius: 9999px;
+  padding: 9px 25px;
+  background-color: transparent;
+  border: 1px solid;
+  font-size: 14px;
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .student_invoice_button button {
+    margin-left: 143px !important;
+  }
+}
+
+/* -------------------------popup model---------------------- */
+/* ------------ */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.modal-content1 {
+  background: #e1dfd7;
+  padding: 20px 20px 90px 20px;
+  width: 620px;
+  border-radius: 0% !important;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 576px) {
+  .modal-content1 {
+    width: auto;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+.student_invoice_popup {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #6b6b6b80;
+}
+.student_invoice_details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+/* ---------------------------table css-------------------- */
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.invoice_table_tr th {
+  border-bottom: 1px solid #6b6b6b80;
+  padding: 8px 0;
+  color: rgb(121, 120, 120);
+  font-weight: 400;
+}
+.invoice_table_tr2 td {
+  padding: 17px 0;
+}
+.student_bank_details {
+  background-color: #ccc9c2;
+  margin-top: -20px;
+}
+.bank-table {
+  max-width: 560px;
+  margin: 0 auto;
+}
+.student_invoice_last {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 15px;
+}
+.student_invoice_last button {
+  border-radius: 9999px;
+  background-color: #6b6b6b;
+  color: white;
+  padding: 7px 15px;
+  border: none;
+  font-size: 14px;
+}
+.student_invoice_downloadicon {
+  font-size: 20px;
+  margin-right: 7px;
+}
+.student_invoice_popup p {
+  font-size: 14px;
+  line-height: 9px;
+  color: rgb(121, 120, 120);
+}
+.student_invoice_popup h3 {
+  font-weight: 800;
+  letter-spacing: -1px;
+  word-spacing: 2px;
+  font-size: 24px;
+}
+@media (max-width: 576px) {
+  .student_invoice_popup h3 {
+    font-size: 18px;
+  }
+}
+.instructor_details_div {
+  line-height: 10px;
+}
+#invoice_table_tr2 {
+  border-bottom: 1px solid #6b6b6b80;
+}
+.student_invoice_hearticon {
+  color: #cb3530;
+  font-size: 21px;
+  margin-right: 3px;
+}

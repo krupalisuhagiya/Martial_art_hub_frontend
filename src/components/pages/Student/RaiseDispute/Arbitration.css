@@ -1,0 +1,22 @@
+#student_stage2_result p {
+  color: #cb3530;
+  background-color: #e1d2d1;
+  font-weight: 600;
+}
+.student_stage2_send-message {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  background-color: #CB3530;
+  border-radius: 10px;
+  color: white;
+  padding: 8px;
+}
+.student_stage2_send-message  p{
+    margin: 4px;
+    font-weight: 600;
+}
+#arbitration_circle_right{
+  color: black;
+}

@@ -1,0 +1,261 @@
+.stage-container {
+  max-width: 1430px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.new-dispute {
+  padding-top: 30px;
+}
+.new-dispute h4 {
+  font-size: 25px;
+  font-weight: 700;
+}
+.stages-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  position: relative;
+  clip-path: polygon(0% 0, 90% 0, 100% 50%, 90% 95%, 0% 95%, 9% 50%);
+}
+
+.stage1 {
+  background-color: #34b175;
+  width: 28%;
+}
+
+.stage2 {
+  background-color: #6b6b6b;
+  width: 28%;
+}
+
+.stage3 {
+  background-color: #9a9892;
+  width: 28%;
+}
+
+.stage-title {
+  font-size: 14px;
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: 400;
+  color: #ddd9d9;
+}
+
+.stage-text {
+  font-size: 16px;
+  margin: 5px 0 0;
+}
+.circle_right {
+  font-size: 27px;
+  color: #9c9c9c;
+}
+
+@media (max-width: 576px) {
+  .stages-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .circle_right {
+    display: none;
+  }
+  .stage {
+    width: 100%;
+  }
+}
+.student_identify_issue {
+  margin-top: 35px;
+  border: 1px solid #c4c3c3;
+  border-radius: 18px;
+  padding: 20px;
+}
+.student_identify_issue_stage_1 {
+  margin-bottom: 20px;
+}
+.student_stage_verified {
+  color: #717171;
+  margin-right: 5px;
+  font-size: 20px;
+}
+.student_identify_issue_div span {
+  font-weight: 500;
+  color: #717171;
+}
+.student_identify_issue_div p {
+  color: grey;
+}
+.student_select_type_main {
+  margin-top: 30px;
+}
+.student_select_type input {
+  width: 100%;
+  padding: 20px 15px;
+  border-radius: 10px;
+  background-color: #dad8d0;
+  border: none;
+  font-size: 17px;
+  outline: none;
+}
+.student_stage_document {
+  margin-top: 30px;
+}
+.student_stage_document_1 textarea {
+  width: 100%;
+  background-color: #dad8d0;
+  padding: 20px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+}
+.student_upload_input {
+  height: 230px;
+  width: 100%;
+}
+.student_upload-container {
+  position: relative;
+  background-color: #dad8d0;
+}
+.student_upload_input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.student_upload_icon {
+  font-size: 40px;
+  color: #999;
+}
+.student_upload-text {
+  color: #666;
+  font-weight: 500;
+}
+.student_upload_contant {
+  text-align: center;
+  height: 230px;
+  padding-top: 30px;
+}
+.student_stage_submit {
+  display: flex;
+  justify-content: end;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+.student_stage_submit button {
+  border-radius: 9999px;
+  background-color: black;
+  color: white;
+  padding: 8px 15px;
+}
+.error {
+  color: red;
+  font-size: 0.9em;
+}
+
+/* ----------------popup-------------- */
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Dimmed background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Popup Container */
+.popup-container {
+  background-color: #e1dfd7;
+  width: 437px;
+  border-radius: 10px;
+  padding: 25px 25px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+
+/* Checkmark Circle */
+.popup-checkmark {
+  width: 75px;
+  height: 75px;
+  background-color: #25c277; /* Light green circle */
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup-checkmark1 {
+  width: 95px;
+  height: 95px;
+  background-color: #90d4a2;
+  border-radius: 50%;
+  margin: 15px auto 15px;
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+  align-items: center;
+}
+.popup-checkmark2 {
+  width: 110px;
+  height: 110px;
+  background-color: #c0e0c0; /* Light green circle */
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-checkmark svg {
+  font-size: 40px; /* Adjust the icon size */
+  color: white; /* Green color for the checkmark */
+}
+.popup-container h3 {
+  font-size: 22px;
+  margin: 10px 0;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Description */
+.popup-container p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Close Button */
+.popup-button {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.popup-button:hover {
+  background-color: #333;
+}
+
+/*  */

@@ -1,0 +1,157 @@
+.student_negotiation_container {
+  max-width: 1430px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+#stage1 {
+  background-color: black;
+}
+#stage2 {
+  background-color: #34b175;
+}
+#circle_right {
+  color: #34b175;
+}
+.student_stage_2 {
+  border: 1px solid #c5c5c5;
+  border-radius: 8px;
+  padding: 8px 15px;
+  margin-top: 20px;
+}
+.student_stage_2 p {
+  color: #717171;
+}
+.student_negotiation_class {
+  display: flex;
+  justify-content: space-between;
+  background-color: #d2cfc9;
+  margin-top: 25px;
+  padding: 22px 15px 15px;
+  border-radius: 10px;
+}
+.student_negotiation_class span {
+  color: #717171;
+}
+@media (max-width: 767px) {
+  .student_negotiation_class {
+    display: block;
+  }
+}
+.student_stage2_chatmain {
+  margin-top: 30px;
+}
+.student_stage2_chat {
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 10px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: calc(112vh - 164px - 97px); 
+}
+@media(max-width:992px){
+  .send-message{
+    margin-top: -35px;
+  }
+}
+#send-msg0 {
+  background-color: #cfded7;
+  color: #6b6b6b;
+}
+.student_type_time p {
+  color: #6b6b6b !important;
+}
+#receivechat {
+  margin-left: 0;
+}
+#receivechat p {
+  background-color: #e1d2d1;
+  color: #6b6b6b;
+}
+#receivechat-time {
+  color: #cb3530;
+}
+.writemessage {
+  background-color: #dad8d0;
+}
+.student_stage2_send {
+  background-color: #dad8d0 !important;
+  outline: none;
+}
+#input-container {
+  width: 100%;
+  border: none;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 10px 10px;
+}
+.student_stage2_chat1 {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow-y: auto;
+  /* height: calc(112vh - 164px - 97px); */
+  /* overflow-y: auto; */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 264px 10px 0;
+  height: 100%; 
+}
+
+.student_stage2_invoice {
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 10px;
+  padding: 10px;
+}
+.student_stage2_invoice_div {
+  display: flex;
+  justify-content: space-between;
+}
+#student_stage2_invoice_div {
+  border-bottom: 1px solid rgb(196, 196, 196);
+}
+.student_stage2_result {
+  margin-top: 20px;
+}
+.student_stage2_result h6 {
+  color: #6b6b6b;
+}
+.student_stage2_result p {
+  background-color: #cfded7;
+  color: #34b175;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+@media (max-width: 1100px) {
+  .student_stage2_invoice1 {
+    padding: 10px 0;
+  }
+}
+.student_stage2_chattime {
+  margin-left: 6%;
+  font-size: 13px;
+  line-height: 0;
+  color: #CB3530;
+}
+.student_stage2_chat_time {
+  display: flex;
+  justify-content: end;
+  margin-right: 5%;
+  line-height: 0;
+  font-size: 13px;
+  color: #6B6B6B;
+}
+#writemessage:-webkit-autofill {
+  background-color: #dad8d0 !important; 
+  color: #000 !important; 
+  border: none; 
+  transition: background-color 5000s ease-in-out 0s; 
+}
+
+/* ------ */
+
