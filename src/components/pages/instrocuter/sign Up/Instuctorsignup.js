@@ -1,11 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  FaArrowLeft,
-  FaCheck,
-  FaGoogle,
-  FaQuoteLeft,
-} from "react-icons/fa";
+import { FaArrowLeft, FaCheck, FaGoogle, FaQuoteLeft } from "react-icons/fa";
 import img20 from "../../../../image/20.png";
 import eye from "../../../../image/eye.png";
 import eyeslash from "../../../../image/eyeslash.png";
@@ -13,6 +8,7 @@ import { Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./Instuctorsignup.css";
 import Footer from "../../../comman/Footer";
+import baseUrl from "../../../../baseUrl";
 function Instuctorsignup() {
   const navigate = useNavigate();
   const [isLoginView, setIsLoginView] = useState(true);
@@ -35,9 +31,10 @@ function Instuctorsignup() {
   const handleCreateAccount = async () => {
     if (validateForm()) {
       try {
-        const response = await axios.post("http://localhost:3000/instrocutersignup", {
+        const response = await axios.post(`${baseUrl}/instructor/signup`, {
           email: formData.email,
           password: formData.password,
+          confirm_password: formData.confirmPassword,
         });
         if (response.status === 201 || response.status === 200) {
           setUser({
@@ -95,8 +92,7 @@ function Instuctorsignup() {
   const handleLogin = async () => {
     if (validateLoginForm()) {
       try {
-        const response = await axios.post("http://localhost:3000/instrocuterlogin",
-          {
+        const response = await axios.post(`${baseUrl}/instructor/login`,{
             email: formData.email,
             password: formData.password,
           }
@@ -372,13 +368,13 @@ function Instuctorsignup() {
           dialogClassName="custom-modal"
         >
           <Modal.Body className="text-center success-modal">
-          <div className="popup-checkmark2">
-                <div className="popup-checkmark1">
-                  <div className="popup-checkmark">
-                    <FaCheck />
-                  </div>
+            <div className="popup-checkmark2">
+              <div className="popup-checkmark1">
+                <div className="popup-checkmark">
+                  <FaCheck />
                 </div>
               </div>
+            </div>
 
             {/* <FaCheckCircle className="check" /> */}
             <h4>Success!</h4>

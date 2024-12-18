@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Dropdown, Modal, Nav, Navbar, Offcanvas } from "react-bootstrap";
-import {
-  FaArrowLeft,
-  FaCheck,
-  FaGoogle,
-  FaQuoteLeft,
-} from "react-icons/fa";
+import { FaArrowLeft, FaCheck, FaGoogle, FaQuoteLeft } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from "../image/martial arts hub..png";
@@ -15,8 +10,9 @@ import eye from "../../src/image/eye.png";
 import eyeslash from "../../src/image/eyeslash.png";
 import "../components/Mainnavbar.css";
 import { TiWarning } from "react-icons/ti";
+import baseUrl from "../baseUrl";
 
-function Mainnavbar({ text }) {
+function Mainnavbar({ text, customClass }) {
   const dropdownItems = [
     { name: "Dashboard", url: "/Dashboard" },
     { name: "My Profile", url: "/StudentProfile" }, // Define the route for My Profile
@@ -35,7 +31,7 @@ function Mainnavbar({ text }) {
     name: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    confrim_password: "",
   });
   const [errors, setErrors] = useState({});
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -54,7 +50,7 @@ function Mainnavbar({ text }) {
 
   const togglePasswordVisibility = () =>
     setIsPasswordVisible(!isPasswordVisible);
-    const validateForm = () => {
+  const validateForm = () => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email || !emailRegex.test(formData.email)) {
@@ -63,8 +59,8 @@ function Mainnavbar({ text }) {
     if (formData.password.length < 6) {
       newErrors.password = "Password must be at least 6 characters long.";
     }
-    if (formData.password !== formData.confirmPassword && !isLoginView) {
-      newErrors.confirmPassword = "Passwords do not match.";
+    if (formData.password !== formData.confrim_password && !isLoginView) {
+      newErrors.confrim_password = "Passwords do not match.";
     }
     if (!formData.name && !isLoginView) {
       newErrors.name = "Name is required.";
@@ -76,10 +72,11 @@ function Mainnavbar({ text }) {
   const handleCreateAccount = async () => {
     if (validateForm()) {
       try {
-        const response = await axios.post("http://localhost:3000/Signup", {
+        const response = await axios.post(`${baseUrl}/student/signup`, {
           name: formData.name,
           email: formData.email,
           password: formData.password,
+          confrim_password:formData.confrim_password
         });
         if (response.status === 201 || response.status === 200) {
           setUser({
@@ -118,7 +115,7 @@ function Mainnavbar({ text }) {
   const handleLogin = async () => {
     if (validateLoginForm()) {
       try {
-        const response = await axios.post("http://localhost:3000/Login", {
+        const response = await axios.post(`${baseUrl}/student/login`, {
           email: formData.email,
           password: formData.password,
         });
@@ -160,7 +157,6 @@ function Mainnavbar({ text }) {
     }
   });
 
- 
   const handleShow = () => setShowOffcanvas(true);
 
   const openLoginModal = () => setShowLoginModal(true);
@@ -175,12 +171,12 @@ function Mainnavbar({ text }) {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   // ----------------------------become instuctore--------------------
-  const handleclick=()=>{
+  const handleclick = () => {
     if (showOffcanvas) {
       handleClose();
     }
-    navigate("/Instuctorsignup")
-  }
+    navigate("/Instuctorsignup");
+  };
   // --------------------------------------auto close toogle offcanvas----------------------
   const handleClose = () => setShowOffcanvas(false);
   const handleNavItemClick = () => {
@@ -188,9 +184,12 @@ function Mainnavbar({ text }) {
       handleClose();
     }
   };
+  // ---------------------------difrent css header-------------
+
   return (
     <div id="main-content">
       <header className="top-0 left-0 z-[9] bg-transparent fixed-top">
+     
         <div className="container">
           <Navbar
             expand="lg"
@@ -230,7 +229,10 @@ function Mainnavbar({ text }) {
               <div className="ml-4 Become2">
                 {!user ? (
                   <>
-                    <button className="badge rounded-pill Become1" onClick={handleclick} >
+                    <button
+                      className="badge rounded-pill Become1"
+                      onClick={handleclick}
+                    >
                       Become an Instructor
                     </button>
                     <button
@@ -321,7 +323,10 @@ function Mainnavbar({ text }) {
                       >
                         Login
                       </button>
-                      <button className="badge rounded-pill  become-instructor" onClick={handleclick}>
+                      <button
+                        className="badge rounded-pill  become-instructor"
+                        onClick={handleclick}
+                      >
                         Become an Instructor
                       </button>
                     </>
@@ -338,7 +343,7 @@ function Mainnavbar({ text }) {
           onHide={closeLoginModal}
           centered
           id="login-modal"
-          >
+        >
           <Modal.Body>
             <div className="popup">
               <div className="popup1">
@@ -524,8 +529,8 @@ function Mainnavbar({ text }) {
                             </label>
                             <div className="email-login1">
                               <input
-                                name="confirmPassword"
-                                value={formData.confirmPassword}
+                                name="confrim_password"
+                                value={formData.confrim_password}
                                 onChange={handleInputChange}
                                 className="rounded-pill"
                                 type={isPasswordVisible ? "text" : "password"}
@@ -541,8 +546,8 @@ function Mainnavbar({ text }) {
                                 style={{ cursor: "pointer", marginLeft: "8px" }}
                               />
                             </div>
-                            {errors.confirmPassword && (
-                              <p className="error">{errors.confirmPassword}</p>
+                            {errors.confrim_password && (
+                              <p className="error">{errors.confrim_password}</p>
                             )}
                           </div>
                         </form>
@@ -590,16 +595,16 @@ function Mainnavbar({ text }) {
           onHide={closeSuccessModal}
           centered
           dialogClassName="custom-modal"
-          >
+        >
           <Modal.Body className="text-center success-modal">
             {/* <FaCheckCircle className="check" /> */}
             <div className="popup-checkmark2">
-                <div className="popup-checkmark1">
-                  <div className="popup-checkmark">
-                    <FaCheck />
-                  </div>
+              <div className="popup-checkmark1">
+                <div className="popup-checkmark">
+                  <FaCheck />
                 </div>
               </div>
+            </div>
             <h4>Success!</h4>
             <p className="check-p">
               Congratulations! Your martial arts hub student account is created

@@ -38,11 +38,18 @@ function App() {
     },
   ];
   const location = useLocation();
+
+  //
+ 
+
   return (
     <div>
       {/* <Mainnavbar text={navItem} /> */}
       {location.pathname !== "/DisputeStage1" &&
-        location.pathname !== "/Negotiation" && location.pathname !== "/Arbitration" && <Mainnavbar text={navItem} />}
+        location.pathname !== "/Negotiation" &&
+        location.pathname !== "/Arbitration" && (
+          <Mainnavbar text={navItem} customClass="header" />
+        )}
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/Dashboard" element={<Dashheader />} />

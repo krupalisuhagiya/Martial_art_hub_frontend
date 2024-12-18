@@ -1,8 +1,11 @@
 import React from 'react'
+import "./StudentProfile.css"
 
 function StudentProfile() {
   return (
-    <div>StudentProfile</div>
+    <div>
+      <h1 className='StudentProfile_main'>student profile</h1>
+    </div>
   )
 }
 
