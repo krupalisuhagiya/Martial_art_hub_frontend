@@ -1,45 +1,5 @@
 {
-  "Signup": [
-    {
-      "id": "1cf7",
-      "name": "Zenaida Montoya",
-      "email": "xugoqoj@mailinator.com",
-      "password": "Pa$$w0rd!"
-    },
-    {
-      "id": "5b45",
-      "name": "jymypit",
-      "email": "hilacar@mailinator.com",
-      "password": "Pa$$w0rd!",
-      "confirmpass": "Pa$$w0rd!"
-    },
-    {
-      "id": "1d45",
-      "name": "Barbara Yates",
-      "email": "jyxatufeda@mailinator.com",
-      "password": "Pa$$w0rd!"
-    },
-    {
-      "id": "d620",
-      "name": "sypeqir",
-      "email": "dybax@mailinator.com",
-      "password": "Pa$$w0rd!",
-      "confirmpass": "Pa$$w0rd!"
-    },
-    {
-      "id": "f666",
-      "name": "Kendall Bowers",
-      "email": "xitiqu@mailinator.com",
-      "password": "Pa$$w0rd!"
-    }
-  ],
-  "Login": [
-    {
-      "id": "7116",
-      "email": "pakyman@mailinator.com",
-      "password": "Pa$$w0rd!"
-    }
-  ],
+
   "instrocutersignup": [
     {
       "id": "d943",

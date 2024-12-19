@@ -12,7 +12,7 @@ import "../components/Mainnavbar.css";
 import { TiWarning } from "react-icons/ti";
 import baseUrl from "../baseUrl";
 
-function Mainnavbar({ text, customClass }) {
+function Mainnavbar({ text }) {
   const dropdownItems = [
     { name: "Dashboard", url: "/Dashboard" },
     { name: "My Profile", url: "/StudentProfile" }, // Define the route for My Profile
@@ -39,7 +39,12 @@ function Mainnavbar({ text, customClass }) {
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     if (savedUser) {
-      setUser(JSON.parse(savedUser));
+      try {
+        setUser(JSON.parse(savedUser));
+      } catch (error) {
+        console.error("Error parsing JSON from localStorage:", error);
+        setUser(null); // Set user to null if parsing fails
+      }
     }
   }, []);
 
@@ -76,7 +81,7 @@ function Mainnavbar({ text, customClass }) {
           name: formData.name,
           email: formData.email,
           password: formData.password,
-          confrim_password:formData.confrim_password
+          confrim_password: formData.confrim_password,
         });
         if (response.status === 201 || response.status === 200) {
           setUser({
@@ -112,6 +117,8 @@ function Mainnavbar({ text, customClass }) {
     return Object.keys(newErrors).length === 0;
   };
 
+  const [showLoginSuccessModal, setShowLoginSuccessModal] = useState(false);
+
   const handleLogin = async () => {
     if (validateLoginForm()) {
       try {
@@ -119,10 +126,23 @@ function Mainnavbar({ text, customClass }) {
           email: formData.email,
           password: formData.password,
         });
-        if (response.status === 200) {
-          setUser(response.data.user);
-          localStorage.setItem("user", JSON.stringify(response.data.user));
+        // if (response.status === 200) {
+        //   setUser(response.data.user);
+        //   localStorage.setItem("user", JSON.stringify(response.data.user));
+        //   closeLoginModal();
+        // }
+        if (response.status === 201 || response.status === 200) {
+          setUser({
+            name:formData.name,
+            email: formData.email,
+          });
+
+          localStorage.setItem(
+            "user",
+            JSON.stringify({ name: formData.name, email: formData.email })
+          );
           closeLoginModal();
+          setShowLoginSuccessModal(true);
         }
       } catch (error) {
         if (error.response) {
@@ -164,9 +184,13 @@ function Mainnavbar({ text, customClass }) {
 
   const closeSuccessModal = () => {
     setShowSuccessModal(false);
-    closeLoginModal(); // Close the signup modal
-    navigate("/"); // Redirect to the home page
+    setIsLoginView(true);
+    openLoginModal();
   };
+  const closeloginSuccessModal=()=>{
+     setShowLoginSuccessModal(false); //login success model
+     navigate("/");
+   }
   // -------------------------------------logout popup--------------------------------
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
@@ -189,7 +213,6 @@ function Mainnavbar({ text, customClass }) {
   return (
     <div id="main-content">
       <header className="top-0 left-0 z-[9] bg-transparent fixed-top">
-     
         <div className="container">
           <Navbar
             expand="lg"
@@ -614,6 +637,35 @@ function Mainnavbar({ text, customClass }) {
             <button
               type="button"
               onClick={closeSuccessModal}
+              className="okay rounded-pill"
+            >
+              Okay, Thanks!
+            </button>
+          </Modal.Body>
+        </Modal>
+        {/* -------------------------------------------login successfully--------------------- */}
+        <Modal
+          show={showLoginSuccessModal}
+          onHide={closeloginSuccessModal}
+          centered
+          dialogClassName="custom-modal"
+        >
+          <Modal.Body className="text-center success-modal">
+            {/* <FaCheckCircle className="check" /> */}
+            <div className="popup-checkmark2">
+              <div className="popup-checkmark1">
+                <div className="popup-checkmark">
+                  <FaCheck />
+                </div>
+              </div>
+            </div>
+            <h4>Success!</h4>
+            <p className="check-p">
+            You have successfully logged in to your martial arts hub student account. Thank you for joining us again. explore new courses, talk with instructors and join your favourite classes!
+            </p>
+            <button
+              type="button"
+              onClick={closeloginSuccessModal}
               className="okay rounded-pill"
             >
               Okay, Thanks!

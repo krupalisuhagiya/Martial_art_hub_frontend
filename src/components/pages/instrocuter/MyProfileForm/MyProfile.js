@@ -7,6 +7,7 @@ import { MdCloudUpload } from "react-icons/md";
 import Footer from "../../../comman/Footer";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
+import baseUrl from "../../../../baseUrl";
 
 function MyProfile() {
   const navigate = useNavigate();
@@ -101,25 +102,23 @@ function MyProfile() {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await axios.post(
-          "http://localhost:3000/instrocuterprofile",
-          {
+        const response = await axios.post(`${baseUrl}/instructor/profile/update`,{
             name: formData.name,
             email: formData.email,
-            mobile: formData.mobile,
-            availability: formData.availability,
-            bio: formData.bio,
-            tagline: formData.tagline,
+            mobile_No: formData.mobile,
+            add_availability: formData.availability,
+            add_bio: formData.bio,
+            add_tagline: formData.tagline,
             experience: formData.experience,
-            trainingHistory: formData.trainingHistory,
+            history: formData.trainingHistory,
             certifications: formData.certifications,
             keywords: formData.keywords,
-            hourlyRates: formData.hourlyRates,
-            freeSessionType: formData.freeSessionType,
-            privateLessonType: formData.privateLessonType,
-            privateHourlyRates: formData.privateHourlyRates,
-            idProofFile: formData.idProofFile,
-            profilePicture: formData.profilePicture,
+            first_session: formData.hourlyRates,
+            frist_classType: formData.freeSessionType,
+            private_classType: formData.privateLessonType,
+            private_session: formData.privateHourlyRates,
+            idproof: formData.idProofFile,
+            profile_picture: formData.profilePicture,
           }
         );
 

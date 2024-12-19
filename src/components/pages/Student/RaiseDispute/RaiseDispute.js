@@ -35,18 +35,20 @@ function RaiseDispute() {
       TimetoRespond: "N/A",
       button: "View More",
     },
-    
   ];
   const navigate = useNavigate();
-  const dispute_create=()=>{
-    navigate("/DisputeStage1"); 
-  }
+  const dispute_create = () => {
+    navigate("/DisputeStage1");
+  };
+  const viewmoreClick = () => {
+    navigate("/Negotiation");
+  };
   return (
     <div>
       <Dashboard />
       <div>
         <div className="student_raiseheader">
-          <div style={{position:"sticky"}}>
+          <div style={{ position: "sticky" }}>
             <div>
               <h3>Disputes</h3>
             </div>
@@ -87,7 +89,7 @@ function RaiseDispute() {
                     <td>{dispute.Status}</td>
                     <td>{dispute.TimetoRespond}</td>
                     <td className="student_dispute_morebutton">
-                      <button>{dispute.button}</button>
+                      <button onClick={viewmoreClick}>{dispute.button}</button>
                     </td>
                   </tr>
                 ))}

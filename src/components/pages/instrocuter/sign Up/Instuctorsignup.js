@@ -15,6 +15,8 @@ function Instuctorsignup() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const closeLoginModal = () => setShowLoginModal(false);
+  const openLoginModal = () => setShowLoginModal(true);
+
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [user, setUser] = useState(null);
   const [formData, setFormData] = useState({
@@ -25,7 +27,12 @@ function Instuctorsignup() {
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     if (savedUser) {
-      setUser(JSON.parse(savedUser));
+      try {
+        setUser(JSON.parse(savedUser));
+      } catch (error) {
+        console.error("Error parsing JSON from localStorage:", error);
+        setUser(null); // Set user to null if parsing fails
+      }
     }
   }, []);
   const handleCreateAccount = async () => {
@@ -89,18 +96,27 @@ function Instuctorsignup() {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+  const [showLoginSuccessModal, setShowLoginSuccessModal] = useState(false);
+
   const handleLogin = async () => {
     if (validateLoginForm()) {
       try {
-        const response = await axios.post(`${baseUrl}/instructor/login`,{
+        const response = await axios.post(`${baseUrl}/instructor/login`, {
+          email: formData.email,
+          password: formData.password,
+        });
+        if (response.status === 201 || response.status === 200) {
+          setUser({
+            name: formData.name,
             email: formData.email,
-            password: formData.password,
-          }
-        );
-        if (response.status === 200) {
-          setUser(response.data.user);
-          localStorage.setItem("user", JSON.stringify(response.data.user));
+          });
+
+          localStorage.setItem(
+            "user",
+            JSON.stringify({ name: formData.name, email: formData.email })
+          );
           closeLoginModal();
+          setShowLoginSuccessModal(true);
         }
       } catch (error) {
         if (error.response) {
@@ -116,10 +132,19 @@ function Instuctorsignup() {
     }
   };
 
+  // const closeSuccessModal = () => {
+  //   setShowSuccessModal(false);
+  //   closeLoginModal(); // Close the signup modal
+  //   navigate("/Profile"); // Redirect to the home page
+  // };
   const closeSuccessModal = () => {
     setShowSuccessModal(false);
-    closeLoginModal(); // Close the signup modal
-    navigate("/Profile"); // Redirect to the home page
+    setIsLoginView(true);
+    openLoginModal();
+  };
+  const closeloginSuccessModal = () => {
+    setShowLoginSuccessModal(false); //login success model
+    navigate("/");
   };
 
   return (
@@ -386,6 +411,37 @@ function Instuctorsignup() {
             <button
               type="button"
               onClick={closeSuccessModal}
+              className="okay rounded-pill"
+            >
+              Okay, Thanks!
+            </button>
+          </Modal.Body>
+        </Modal>
+        {/* --------------login successfully */}
+        <Modal
+          show={showLoginSuccessModal}
+          onHide={closeloginSuccessModal}
+          centered
+          dialogClassName="custom-modal"
+        >
+          <Modal.Body className="text-center success-modal">
+            {/* <FaCheckCircle className="check" /> */}
+            <div className="popup-checkmark2">
+              <div className="popup-checkmark1">
+                <div className="popup-checkmark">
+                  <FaCheck />
+                </div>
+              </div>
+            </div>
+            <h4>Success!</h4>
+            <p className="check-p">
+              You have successfully logged in to your martial arts hub student
+              account. Thank you for joining us again. explore new courses, talk
+              with instructors and join your favourite classes!
+            </p>
+            <button
+              type="button"
+              onClick={closeloginSuccessModal}
               className="okay rounded-pill"
             >
               Okay, Thanks!

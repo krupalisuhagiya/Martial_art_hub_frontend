@@ -39,6 +39,9 @@ function ClosedDisputes() {
     const dispute_create=()=>{
       navigate("/DisputeStage1"); 
     }
+    const closemoreClick=()=>{
+      navigate("/Arbitration")
+    }
   return (
     <div>
       <Dashboard />
@@ -86,7 +89,7 @@ function ClosedDisputes() {
                       <td>${dispute.Result}</td>
                       <td>{dispute.dateClosed}</td>
                       <td className="student_dispute_morebutton">
-                        <button>{dispute.button}</button>
+                        <button onClick={closemoreClick}>{dispute.button}</button>
                       </td>
                     </tr>
                   ))}
