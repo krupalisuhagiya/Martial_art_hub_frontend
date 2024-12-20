@@ -2,7 +2,15 @@
 :root {
   --commancolor: black;
 }
+/* ------------------------------studentProfile navbar--------------------------------------- */
 
+/* ----------------------------------------------------------comman navbar-------------------------- */
+/* .btn.show:focus-visible{
+  box-shadow: none;
+}
+.btn:first-child:active{
+  background-color: black;
+} */
 header {
   /* ----- */
   top: 0;
@@ -32,7 +40,9 @@ header::before {
   margin: 0 auto;
 }
 .logo {
-  width: 160px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -1px;
 }
 .navbar-nav {
   display: flex !important;
@@ -580,7 +590,7 @@ header::before {
   border: 0 !important;
 }
 .dropdown-toggle:hover {
-  background-color: black !important;
+  background-color: black ;
 }
 .btn.show {
   background-color: black !important;
@@ -670,7 +680,7 @@ header::before {
   justify-content: space-around;
   display: flex;
 }
-.areyou{
+.areyou {
   padding-top: 32px;
 }
 .areyou p {
@@ -690,23 +700,24 @@ header::before {
   width: 186px;
   height: 42px;
 }
-.dropdown-item{
+.dropdown-item {
   padding-bottom: 5px;
 }
-.dropdown-menu{
-  background-color: #E1DFD7;
+.dropdown-menu {
+  background-color: #e1dfd7;
 }
-.dropdown-item:focus, .dropdown-item:hover {
- background-color: #E1DFD7; 
- color: black;
+.dropdown-item:focus,
+.dropdown-item:hover {
+  background-color: #e1dfd7;
+  color: black;
 }
-.dropdown-item.active{
+.dropdown-item.active {
   color: black;
   font-weight: 700;
-  background-color: #E1DFD7;
+  background-color: #e1dfd7;
   position: relative;
 }
-.dropdown-item.active::after{
+.dropdown-item.active::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -716,6 +727,6 @@ header::before {
   height: 2px;
   background-color: black;
 }
-.dropdown-menu{
+.dropdown-menu {
   padding: 17px;
 }

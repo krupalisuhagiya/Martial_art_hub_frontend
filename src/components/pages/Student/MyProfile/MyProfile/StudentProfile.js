@@ -4,7 +4,7 @@ import "./StudentProfile.css"
 function StudentProfile() {
   return (
     <div>
-      <h1 className='StudentProfile_main'>student profile</h1>
+      <h1 className='student_profile'>student profile</h1>
     </div>
   )
 }

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import "./Instuctorsignup.css";
 import Footer from "../../../comman/Footer";
 import baseUrl from "../../../../baseUrl";
+
 function Instuctorsignup() {
   const navigate = useNavigate();
   const [isLoginView, setIsLoginView] = useState(true);
@@ -70,9 +71,9 @@ function Instuctorsignup() {
     if (!formData.email || !emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
-    if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters long.";
-    }
+    // if (formData.password.length < 6) {
+    //   newErrors.password = "Password must be at least 6 characters long.";
+    // }
     if (formData.password !== formData.confirmPassword && !isLoginView) {
       newErrors.confirmPassword = "Passwords do not match.";
     }
@@ -90,9 +91,9 @@ function Instuctorsignup() {
     if (!formData.email || !emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
-    if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters long.";
-    }
+    // if (formData.password.length < 6) {
+    //   newErrors.password = "Password must be at least 6 characters long.";
+    // }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -105,6 +106,11 @@ function Instuctorsignup() {
           email: formData.email,
           password: formData.password,
         });
+  
+        localStorage.setItem('InstructorToken',response.data.Token)
+        localStorage.setItem('instructorId',response.data.data._id)
+
+
         if (response.status === 201 || response.status === 200) {
           setUser({
             name: formData.name,
@@ -141,10 +147,11 @@ function Instuctorsignup() {
     setShowSuccessModal(false);
     setIsLoginView(true);
     openLoginModal();
+    // navigate("/Profile");
   };
   const closeloginSuccessModal = () => {
     setShowLoginSuccessModal(false); //login success model
-    navigate("/");
+    navigate("/Profile");
   };
 
   return (
@@ -204,7 +211,7 @@ function Instuctorsignup() {
                                 name="password"
                                 value={formData.password}
                                 onChange={handleInputChange}
-                                maxLength={6}
+                                // maxLength={6}
                               />
                               <img
                                 src={isPasswordVisible ? eye : eyeslash}
@@ -286,7 +293,7 @@ function Instuctorsignup() {
                                 type={isPasswordVisible ? "text" : "password"}
                                 className="rounded-pill"
                                 placeholder="Password"
-                                maxLength={6}
+                                // maxLength={6}
                               />
                               <img
                                 src={isPasswordVisible ? eye : eyeslash}
@@ -313,7 +320,7 @@ function Instuctorsignup() {
                                 className="rounded-pill"
                                 type={isPasswordVisible ? "text" : "password"}
                                 placeholder="Confirm Password"
-                                maxLength={6}
+                                // maxLength={6}
                               />
                               <img
                                 src={isPasswordVisible ? eye : eyeslash}
@@ -457,3 +464,5 @@ function Instuctorsignup() {
 }
 
 export default Instuctorsignup;
+
+

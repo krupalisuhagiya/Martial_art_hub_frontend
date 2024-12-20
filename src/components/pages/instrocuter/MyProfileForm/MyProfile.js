@@ -11,6 +11,8 @@ import baseUrl from "../../../../baseUrl";
 
 function MyProfile() {
   const navigate = useNavigate();
+  const token = localStorage.getItem("InstructorToken");
+  const instructorId = localStorage.getItem("instructorId");
 
   // Navigation to instructor signup
   const navigateToInstructorSignup = () => {
@@ -41,6 +43,7 @@ function MyProfile() {
   });
   const [errors, setErrors] = useState({});
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+
 
   // File change handlers
   const handleFileChange = (event) => {
@@ -100,28 +103,37 @@ function MyProfile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const body = new FormData();
+    body.append("name",formData.name)
+    body.append("email", formData.email);
+    body.append("mobile_No", formData.mobile);
+    body.append("add_availability", formData.availability);
+    body.append("add_bio", formData.bio);
+    body.append("add_tagline", formData.tagline);
+    body.append("experience", formData.experience);
+    body.append("history", formData.trainingHistory);
+    body.append("certifications", formData.certifications);
+    body.append("keywords", formData.keywords);
+    body.append("first_session", formData.hourlyRates);
+    body.append("frist_classType", formData.freeSessionType);
+    body.append("private_classType", formData.privateLessonType);
+    body.append("private_session", formData.privateHourlyRates);
+    body.append("idproof", idProofFile); // Append file
+    body.append("profile_picture", profilePicture); // Append file
+    body.append("instructorId", instructorId);
+
     if (validateForm()) {
       try {
-        const response = await axios.post(`${baseUrl}/instructor/profile/update`,{
-            name: formData.name,
-            email: formData.email,
-            mobile_No: formData.mobile,
-            add_availability: formData.availability,
-            add_bio: formData.bio,
-            add_tagline: formData.tagline,
-            experience: formData.experience,
-            history: formData.trainingHistory,
-            certifications: formData.certifications,
-            keywords: formData.keywords,
-            first_session: formData.hourlyRates,
-            frist_classType: formData.freeSessionType,
-            private_classType: formData.privateLessonType,
-            private_session: formData.privateHourlyRates,
-            idproof: formData.idProofFile,
-            profile_picture: formData.profilePicture,
+        const response = await axios.put(
+          `${baseUrl}/instructor/profile/update`,body,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
-
+        console.log(response,"==============>");
         if (response.status === 201 || response.status === 200) {
           setShowSuccessModal(true);
         }
@@ -138,7 +150,7 @@ function MyProfile() {
   // Success modal close
   const closeSuccessModal = () => {
     setShowSuccessModal(false);
-    navigate("/"); // Redirect to home page
+    navigate("/");
   };
 
   return (
@@ -414,12 +426,12 @@ function MyProfile() {
         <Modal.Body className="text-center success-modal">
           {/* <FaCheckCircle className="check" /> */}
           <div className="popup-checkmark2">
-                <div className="popup-checkmark1">
-                  <div className="popup-checkmark">
-                    <FaCheck />
-                  </div>
-                </div>
+            <div className="popup-checkmark1">
+              <div className="popup-checkmark">
+                <FaCheck />
               </div>
+            </div>
+          </div>
 
           <h4>Profile Activated!</h4>
           <p className="check-p">

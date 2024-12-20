@@ -3,7 +3,7 @@ import { Dropdown, Modal, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { FaArrowLeft, FaCheck, FaGoogle, FaQuoteLeft } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import logo from "../image/martial arts hub..png";
+// import logo from "../image/martial arts hub..png";
 import img19 from "../../src/image/19.png";
 import img20 from "../../src/image/20.png";
 import eye from "../../src/image/eye.png";
@@ -15,7 +15,7 @@ import baseUrl from "../baseUrl";
 function Mainnavbar({ text }) {
   const dropdownItems = [
     { name: "Dashboard", url: "/Dashboard" },
-    { name: "My Profile", url: "/StudentProfile" }, // Define the route for My Profile
+    { name: "My Profile", url: "/MyProfileform" }, // Define the route for My Profile
     { name: "Messages", url: "/Messages" }, // Define the route for Messages
   ];
   // -----------------------------------------------dropdown map end------------------------
@@ -61,9 +61,9 @@ function Mainnavbar({ text }) {
     if (!formData.email || !emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
-    if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters long.";
-    }
+    // if (formData.password.length < 6) {
+    //   newErrors.password = "Password must be at least 6 characters long.";
+    // }
     if (formData.password !== formData.confrim_password && !isLoginView) {
       newErrors.confrim_password = "Passwords do not match.";
     }
@@ -110,9 +110,9 @@ function Mainnavbar({ text }) {
     if (!formData.email || !emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
-    if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters long.";
-    }
+    // if (formData.password.length < 6) {
+    //   newErrors.password = "Password must be at least 6 characters long.";
+    // }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -126,14 +126,9 @@ function Mainnavbar({ text }) {
           email: formData.email,
           password: formData.password,
         });
-        // if (response.status === 200) {
-        //   setUser(response.data.user);
-        //   localStorage.setItem("user", JSON.stringify(response.data.user));
-        //   closeLoginModal();
-        // }
         if (response.status === 201 || response.status === 200) {
           setUser({
-            name:formData.name,
+            name: formData.name,
             email: formData.email,
           });
 
@@ -141,7 +136,6 @@ function Mainnavbar({ text }) {
             "user",
             JSON.stringify({ name: formData.name, email: formData.email })
           );
-          closeLoginModal();
           setShowLoginSuccessModal(true);
         }
       } catch (error) {
@@ -187,10 +181,11 @@ function Mainnavbar({ text }) {
     setIsLoginView(true);
     openLoginModal();
   };
-  const closeloginSuccessModal=()=>{
-     setShowLoginSuccessModal(false); //login success model
-     navigate("/");
-   }
+  const closeloginSuccessModal = () => {
+    setShowLoginSuccessModal(false); //login success model
+    closeLoginModal();
+    navigate("/");
+  };
   // -------------------------------------logout popup--------------------------------
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
@@ -212,18 +207,20 @@ function Mainnavbar({ text }) {
 
   return (
     <div id="main-content">
-      <header className="top-0 left-0 z-[9] bg-transparent fixed-top">
+      <header
+        className="top-0 left-0 z-[9] bg-transparent fixed-top">
         <div className="container">
           <Navbar
             expand="lg"
             className="mx-auto flex items-center justify-between p-6 lg:px-8"
           >
             <Navbar.Brand href="#home" className="flex flex-1">
-              <img
+              <h5 className="logo">martial arts hub</h5>
+              {/* <img
                 src={logo}
                 alt="Logo"
                 className="logo font-extrabold text-lg"
-              />
+              /> */}
             </Navbar.Brand>
             <button
               className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 lg:hidden logout-toogler-btn"
@@ -313,11 +310,12 @@ function Mainnavbar({ text }) {
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title>
                   <Navbar.Brand href="/" className="flex flex-1">
-                    <img
+                  <h5>martial arts hub</h5>
+                    {/* <img
                       src={logo}
                       alt="Logo"
                       className="logo font-extrabold text-lg"
-                    />
+                    /> */}
                   </Navbar.Brand>
                 </Offcanvas.Title>
               </Offcanvas.Header>
@@ -433,7 +431,7 @@ function Mainnavbar({ text }) {
                                 name="password"
                                 value={formData.password}
                                 onChange={handleInputChange}
-                                maxLength={6}
+                                // maxLength={6}
                               />
                               <img
                                 src={isPasswordVisible ? eye : eyeslash}
@@ -531,7 +529,7 @@ function Mainnavbar({ text }) {
                                 type={isPasswordVisible ? "text" : "password"}
                                 className="rounded-pill"
                                 placeholder="Password"
-                                maxLength={6}
+                                // maxLength={6}
                               />
                               <img
                                 src={isPasswordVisible ? eye : eyeslash}
@@ -558,7 +556,7 @@ function Mainnavbar({ text }) {
                                 className="rounded-pill"
                                 type={isPasswordVisible ? "text" : "password"}
                                 placeholder="Confirm Password"
-                                maxLength={6}
+                                // maxLength={6}
                               />
                               <img
                                 src={isPasswordVisible ? eye : eyeslash}
@@ -661,7 +659,9 @@ function Mainnavbar({ text }) {
             </div>
             <h4>Success!</h4>
             <p className="check-p">
-            You have successfully logged in to your martial arts hub student account. Thank you for joining us again. explore new courses, talk with instructors and join your favourite classes!
+              You have successfully logged in to your martial arts hub student
+              account. Thank you for joining us again. explore new courses, talk
+              with instructors and join your favourite classes!
             </p>
             <button
               type="button"
