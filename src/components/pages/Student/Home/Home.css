@@ -639,9 +639,9 @@
   border: 1px solid #000 !important;
   height: 36px !important;
   width: 36px !important;
-  right: 100px !important;
+  right: 62px !important;
   left: inherit;
-  top: -6% !important;
+  top: -26px !important;
   position: absolute !;
   border-radius: 50% !important;
 }
@@ -699,8 +699,10 @@
 .heart {
   display: block;
   text-align: center;
+  cursor: pointer;
 }
-.heart:hover{
+
+.heart:hover {
   color: red;
 }
 .download {
@@ -883,11 +885,11 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
-.home-star span{
-  color: #FFB423;
+.home-star span {
+  color: #ffb423;
 }
-.home-star span:last-of-type{
-  color: #BCBCBC;
+.home-star span:last-of-type {
+  color: #bcbcbc;
 }
 /* --------------------------------------------accordion-------------------------- */
 .accordion-item:not(:first-of-type) {
@@ -917,12 +919,3 @@ body {
 .accordion {
   margin-top: 48px;
 }
-
-
-
-
-
-
-
-
-

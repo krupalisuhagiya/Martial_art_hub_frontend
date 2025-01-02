@@ -41,7 +41,7 @@ header::before {
 }
 .logo {
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -1px;
 }
 .navbar-nav {
@@ -274,7 +274,7 @@ header::before {
   object-position: 55%;
   object-fit: cover;
   width: 505px;
-  height: 595px;
+  height: 640px;
   display: block;
 }
 .modal-body {
@@ -340,26 +340,26 @@ header::before {
   position: absolute;
   background-image: linear-gradient(180deg, #09090900, #090909);
 }
-.form-login {
+/* .form-login {
   margin-top: 1.25rem;
-}
+} */
 .modal-dialog {
   max-width: 1110px;
 }
 .form-login h2 {
   font-weight: 600;
   font-size: 30px;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
 }
 .form-login p {
   color: #0f0f0fb3;
   font-size: 15px;
 }
 .email-login {
-  row-gap: 1.5rem;
+  row-gap: 0.5rem;
   flex-direction: column;
   display: flex;
-  margin-top: 31px;
+  /* margin-top: 31px; */
 }
 .email-login1 {
   position: relative;
@@ -393,7 +393,8 @@ header::before {
   gap: 0.75rem;
   display: flex;
   flex-direction: column;
-  margin-top: 4.75rem;
+  margin-top: 14px;
+  /* margin-top: 4.75rem; */
 }
 .tobtn button {
   border: none;
@@ -446,6 +447,7 @@ header::before {
 }
 .modal-header {
   position: absolute;
+  border: none !important;
 }
 .modal-header .btn-close {
   position: relative;
@@ -730,3 +732,8 @@ header::before {
 .dropdown-menu {
   padding: 17px;
 }
+
+/* ---------- */
+
+
+

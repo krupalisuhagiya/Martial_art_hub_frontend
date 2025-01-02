@@ -33,15 +33,15 @@ function MyProfileform() {
     },
     {
       name: "Edit Profile Details",
-      // url: "/EditProfileDetails",
+      url: "/EditProfileDetails",
     },
     {
       name: "Forgot Password",
-      // url: "/ForgotPassword",
+      url: "/ForgotPassword",
     },
     {
       name: "Reset Password",
-      // url: "/ResetPassword",
+      url: "/ResetPassword",
     },
   ];
   const experience = [

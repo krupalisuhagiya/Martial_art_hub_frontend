@@ -32,7 +32,7 @@ function Instuctorsignup() {
         setUser(JSON.parse(savedUser));
       } catch (error) {
         console.error("Error parsing JSON from localStorage:", error);
-        setUser(null); // Set user to null if parsing fails
+        setUser(null);
       }
     }
   }, []);
@@ -71,9 +71,6 @@ function Instuctorsignup() {
     if (!formData.email || !emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
-    // if (formData.password.length < 6) {
-    //   newErrors.password = "Password must be at least 6 characters long.";
-    // }
     if (formData.password !== formData.confirmPassword && !isLoginView) {
       newErrors.confirmPassword = "Passwords do not match.";
     }
@@ -91,9 +88,6 @@ function Instuctorsignup() {
     if (!formData.email || !emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
-    // if (formData.password.length < 6) {
-    //   newErrors.password = "Password must be at least 6 characters long.";
-    // }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -106,10 +100,11 @@ function Instuctorsignup() {
           email: formData.email,
           password: formData.password,
         });
-  
-        localStorage.setItem('InstructorToken',response.data.Token)
-        localStorage.setItem('instructorId',response.data.data._id)
 
+        console.log(response);
+
+        localStorage.setItem("InstructorToken", response.data.Token);
+        localStorage.setItem("instructorId", response.data.data._id);
 
         if (response.status === 201 || response.status === 200) {
           setUser({
@@ -137,21 +132,15 @@ function Instuctorsignup() {
       }
     }
   };
-
-  // const closeSuccessModal = () => {
-  //   setShowSuccessModal(false);
-  //   closeLoginModal(); // Close the signup modal
-  //   navigate("/Profile"); // Redirect to the home page
-  // };
   const closeSuccessModal = () => {
     setShowSuccessModal(false);
     setIsLoginView(true);
     openLoginModal();
-    // navigate("/Profile");
   };
   const closeloginSuccessModal = () => {
-    setShowLoginSuccessModal(false); //login success model
-    navigate("/Profile");
+    setShowLoginSuccessModal(false);
+    navigate("/DashboardInstructor");
+    localStorage.setItem("Role", "Instructor");
   };
 
   return (
@@ -211,7 +200,6 @@ function Instuctorsignup() {
                                 name="password"
                                 value={formData.password}
                                 onChange={handleInputChange}
-                                // maxLength={6}
                               />
                               <img
                                 src={isPasswordVisible ? eye : eyeslash}
@@ -293,7 +281,6 @@ function Instuctorsignup() {
                                 type={isPasswordVisible ? "text" : "password"}
                                 className="rounded-pill"
                                 placeholder="Password"
-                                // maxLength={6}
                               />
                               <img
                                 src={isPasswordVisible ? eye : eyeslash}
@@ -320,7 +307,6 @@ function Instuctorsignup() {
                                 className="rounded-pill"
                                 type={isPasswordVisible ? "text" : "password"}
                                 placeholder="Confirm Password"
-                                // maxLength={6}
                               />
                               <img
                                 src={isPasswordVisible ? eye : eyeslash}
@@ -407,8 +393,6 @@ function Instuctorsignup() {
                 </div>
               </div>
             </div>
-
-            {/* <FaCheckCircle className="check" /> */}
             <h4>Success!</h4>
             <p className="check-p">
               Congratulations! Your martial arts hub student account is created
@@ -432,7 +416,6 @@ function Instuctorsignup() {
           dialogClassName="custom-modal"
         >
           <Modal.Body className="text-center success-modal">
-            {/* <FaCheckCircle className="check" /> */}
             <div className="popup-checkmark2">
               <div className="popup-checkmark1">
                 <div className="popup-checkmark">
@@ -464,5 +447,3 @@ function Instuctorsignup() {
 }
 
 export default Instuctorsignup;
-
-

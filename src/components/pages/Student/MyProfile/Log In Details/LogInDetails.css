@@ -1,0 +1,18 @@
+.student_login_details {
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 10px;
+}
+#email-login1 input
+{
+    width: 100%;
+}
+.student_login_details_h6{
+    font-weight: bold;
+    font-size: 21px;
+}
+.student_login_details_p{
+    font-size: 15px;
+    color: grey;
+}

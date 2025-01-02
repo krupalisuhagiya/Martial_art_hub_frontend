@@ -1,5 +1,11 @@
 {
-  
+  "studentforgotpassword": [
+    {
+      "id": "dee4",
+      "email": "krupalisuhagiya@gmail.com",
+      "password": "123456"
+    }
+  ],
   "student_message": [
     {
       "id": "",
@@ -10,6 +16,18 @@
     {
       "id": "",
       "message": ""
+    }
+  ],
+  "Favorite_Instructors": [
+    {
+      "img": "",
+      "hearticon": "",
+      "staricon": "",
+      "ratings": "",
+      "name": "",
+      "experience": "",
+      "view_button": "",
+      "message_button": ""
     }
   ]
 }

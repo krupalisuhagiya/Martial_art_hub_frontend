@@ -15,8 +15,15 @@ import baseUrl from "../baseUrl";
 function Mainnavbar({ text }) {
   const dropdownItems = [
     { name: "Dashboard", url: "/Dashboard" },
-    { name: "My Profile", url: "/MyProfileform" }, // Define the route for My Profile
+    { name: "My Profile", url: "/StudentProfile" },
     { name: "Messages", url: "/Messages" }, // Define the route for Messages
+  ];
+  const dropdownItemsIns = [
+    { name: "Dashboard", url: "/DashboardInstructor" },
+    { name: "My Profile", url: "/MyProfileform" },
+    { name: "Create Class", url: "/InstructorCreateClass" },
+    { name: "Chat", url: "/InstructorChat" },
+    { name: "Message Requests", url: "/InstructorMessageRequests" },
   ];
   // -----------------------------------------------dropdown map end------------------------
 
@@ -61,9 +68,6 @@ function Mainnavbar({ text }) {
     if (!formData.email || !emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
-    // if (formData.password.length < 6) {
-    //   newErrors.password = "Password must be at least 6 characters long.";
-    // }
     if (formData.password !== formData.confrim_password && !isLoginView) {
       newErrors.confrim_password = "Passwords do not match.";
     }
@@ -110,9 +114,6 @@ function Mainnavbar({ text }) {
     if (!formData.email || !emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
-    // if (formData.password.length < 6) {
-    //   newErrors.password = "Password must be at least 6 characters long.";
-    // }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -126,15 +127,18 @@ function Mainnavbar({ text }) {
           email: formData.email,
           password: formData.password,
         });
+        const { name, email } = response.data.data;
+        localStorage.setItem("StudentToken", response.data.Token);
+        localStorage.setItem("studentId", response.data.data._id);
         if (response.status === 201 || response.status === 200) {
           setUser({
-            name: formData.name,
-            email: formData.email,
+            name: name,
+            email: email,
           });
 
           localStorage.setItem(
             "user",
-            JSON.stringify({ name: formData.name, email: formData.email })
+            JSON.stringify({ name: name, email: email }) 
           );
           setShowLoginSuccessModal(true);
         }
@@ -154,8 +158,6 @@ function Mainnavbar({ text }) {
 
   const handleLogout = () => {
     setShowLogoutConfirm(true);
-    // setUser(null);
-    // localStorage.removeItem("user");
     navigate("/");
   };
   useEffect(() => {
@@ -184,7 +186,8 @@ function Mainnavbar({ text }) {
   const closeloginSuccessModal = () => {
     setShowLoginSuccessModal(false); //login success model
     closeLoginModal();
-    navigate("/");
+    navigate("/Dashboard");
+    localStorage.setItem("Role", "Student");
   };
   // -------------------------------------logout popup--------------------------------
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
@@ -207,15 +210,14 @@ function Mainnavbar({ text }) {
 
   return (
     <div id="main-content">
-      <header
-        className="top-0 left-0 z-[9] bg-transparent fixed-top">
+      <header className="top-0 left-0 z-[9] bg-transparent fixed-top">
         <div className="container">
           <Navbar
             expand="lg"
             className="mx-auto flex items-center justify-between p-6 lg:px-8"
           >
             <Navbar.Brand href="#home" className="flex flex-1">
-              <h5 className="logo">martial arts hub</h5>
+              <h5 className="logo">martial arts hub.</h5>
               {/* <img
                 src={logo}
                 alt="Logo"
@@ -231,20 +233,34 @@ function Mainnavbar({ text }) {
             {/* Desktop Navigation */}
             <div style={{ display: "flex" }}>
               <div className="destop-header hidden lg:flex">
-                <Nav className="navbaratag flex flex-row items-center">
-                  {text.map((item, index) => (
-                    <Link
-                      key={index}
-                      to={item.url}
-                      className={`nav-link ${
-                        location.pathname === item.url ? "active" : ""
-                      }`}
-                      onClick={handleNavItemClick}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </Nav>
+                <nav
+                  className="navbaratag flex flex-row items-center"
+                  style={{ display: "flex" }}
+                >
+                  {text.map((item, index) => {
+                    const currentPath = location.pathname;
+                    const currentSearch = location.search;
+
+                    // Match the base path and query parameters
+                    const isActive =
+                      currentPath === item.url.split("?")[0] &&
+                      (item.url.includes("?section=")
+                        ? currentSearch === `?${item.url.split("?")[1]}`
+                        : currentSearch === "" &&
+                          !item.url.includes("?section="));
+
+                    return (
+                      <Link
+                        key={index}
+                        to={item.url}
+                        className={`nav-link ${isActive ? "active" : ""}`}
+                        onClick={handleNavItemClick}
+                      >
+                        {item.name}
+                      </Link>
+                    );
+                  })}
+                </nav>
               </div>
               <div className="ml-4 Become2">
                 {!user ? (
@@ -278,17 +294,31 @@ function Mainnavbar({ text }) {
                       {user.email.charAt(0).toUpperCase()}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      {dropdownItems.map((item, index) => (
-                        <Dropdown.Item
-                          key={index}
-                          onClick={() => navigate(item.url)}
-                          className={`nav-link ${
-                            location.pathname === item.url ? "active" : ""
-                          }`}
-                        >
-                          {item.name}
-                        </Dropdown.Item>
-                      ))}
+                      {localStorage.getItem("Role") === "Student"
+                        ? dropdownItems.map((item, index) => (
+                            <Dropdown.Item
+                              key={index}
+                              onClick={() => navigate(item.url)}
+                              className={`nav-link ${
+                                location.pathname === item.url ? "active" : ""
+                              }`}
+                            >
+                              {item.name}
+                            </Dropdown.Item>
+                          ))
+                        : localStorage.getItem("Role") === "Instructor"
+                        ? dropdownItemsIns.map((item, index) => (
+                            <Dropdown.Item
+                              key={index}
+                              onClick={() => navigate(item.url)}
+                              className={`nav-link ${
+                                location.pathname === item.url ? "active" : ""
+                              }`}
+                            >
+                              {item.name}
+                            </Dropdown.Item>
+                          ))
+                        : null}
                       <Dropdown.Item
                         onClick={handleLogout}
                         style={{ padding: "0" }}
@@ -310,7 +340,7 @@ function Mainnavbar({ text }) {
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title>
                   <Navbar.Brand href="/" className="flex flex-1">
-                  <h5>martial arts hub</h5>
+                    <h5>martial arts hub.</h5>
                     {/* <img
                       src={logo}
                       alt="Logo"
@@ -395,7 +425,9 @@ function Mainnavbar({ text }) {
                     <FaArrowLeft className="form-arrow" />
                     {isLoginView ? (
                       <>
-                        <h2>Welcome Back! Ready to Learn?</h2>
+                        <h2 style={{ marginTop: "10px" }}>
+                          Welcome Back! Ready to Learn?
+                        </h2>
                         <p>
                           Please login to continue to your
                           <span style={{ fontWeight: "800" }}>
@@ -420,7 +452,7 @@ function Mainnavbar({ text }) {
                               <p className="error">{errors.email}</p>
                             )}
                           </div>
-                          <div>
+                          <div style={{ marginTop: "10px" }}>
                             <label className="label-email">Password</label>
                             <div className="email-login1">
                               <input
@@ -447,7 +479,7 @@ function Mainnavbar({ text }) {
                             )}
                           </div>
                         </form>
-                        <div className="tobtn">
+                        <div className="tobtn" style={{ marginTop: "50px" }}>
                           <button
                             type="button"
                             onClick={handleLogin}
@@ -610,12 +642,13 @@ function Mainnavbar({ text }) {
           </Modal.Body>
         </Modal>
 
-        {/* Success Modal */}
+        {/* signup Success Modal */}
         <Modal
           show={showSuccessModal}
           onHide={closeSuccessModal}
           centered
           dialogClassName="custom-modal"
+          backdrop="static"
         >
           <Modal.Body className="text-center success-modal">
             {/* <FaCheckCircle className="check" /> */}
@@ -647,6 +680,7 @@ function Mainnavbar({ text }) {
           onHide={closeloginSuccessModal}
           centered
           dialogClassName="custom-modal"
+          backdrop="static" //not close popup clickon close popup
         >
           <Modal.Body className="text-center success-modal">
             {/* <FaCheckCircle className="check" /> */}
@@ -705,6 +739,7 @@ function Mainnavbar({ text }) {
                   setUser(null);
                   localStorage.removeItem("user");
                   setShowLogoutConfirm(false); // Close modal after logout
+                  window.location.reload();
                 }}
                 className="logout-btn rounded-pill"
               >

@@ -1,3 +1,174 @@
-.student_profile {
-  padding-top: 80px;
+.studentprofile_aboutMe {
+  margin-top: 10px;
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 10px;
+  padding: 20px;
+  height: 160px;
+}
+.studentprofile_aboutMe p {
+  height: 90px;
+  overflow-y: auto;
+  padding: 0 10px;
+  /* ----- */
+  line-height: 1.5;
+}
+.studentprofile_aboutMe p::-webkit-scrollbar {
+  width: 8px;
+}
+.studentprofile_aboutMe p::-webkit-scrollbar-track {
+  background: #b6b6b6;
+  border-radius: 10px;
+}
+
+.studentprofile_aboutMe p::-webkit-scrollbar-thumb {
+  background: #707070;
+  border-radius: 10px;
+  border: 2px solid #eaeaea;
+}
+.student_profile_Myclass_div {
+  margin-top: 10px;
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 8px;
+  padding: 18px;
+}
+.student_profile_class {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 10px;
+  gap: 15px;
+}
+.student_profile_class::-webkit-scrollbar {
+  height: 8px;
+}
+.student_profile_class::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+.student_profile_class::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.student_profile_class_details {
+  flex: 0 0 auto;
+  width: 230px;
+}
+.sudent_profile_classimg {
+  width: 100%;
+  height: auto;
+}
+.student_profile_classtitle {
+  font-weight: 700;
+}
+/* ------ */
+.studentclass_outer {
+  width: 75px;
+  background-color: #c7c6bf;
+  border-radius: 9999px;
+  height: 22px;
+  margin-top: 3px;
+  margin-left: 12px;
+}
+.studentclass_complete100 {
+  width: 75px;
+  display: flex;
+  justify-content: center;
+  background-color: #34b175;
+}
+.studentclass_inner {
+  height: 22px;
+  width: 55px;
+  background-color: #34b175;
+  border-radius: 9999px;
+  color: white;
+  font-size: 15px;
+  text-align: center;
+}
+.student_starts {
+  color: #cb3530;
+  border-radius: 999px;
+  border: 1px solid #cb3530;
+  background-color: transparent;
+  padding: 4px 10px;
+  font-weight: 600;
+  font-size: 15px;
+}
+.student_see {
+  border-radius: 999px;
+  border: 1px solid rgb(178, 178, 178);
+  background-color: transparent;
+  padding: 4px 15px;
+  font-size: 15px;
+}
+.student_payment_history {
+  margin-top: 10px;
+  border: 1px solid rgb(189, 189, 189);
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+.student_payment_history_h6 {
+  font-size: 18px;
+  padding-top: 15px;
+  height: 58px;
+  border-bottom: 1px solid rgb(189, 189, 189);
+}
+#payment-img img {
+  height: 95px;
+  width: 105px;
+  border-radius: 5px;
+}
+#payment-button p {
+  text-align: end;
+  color: black;
+}
+@media(max-width:576px){
+  #payment-button p {
+  text-align: center;
+  }
+  .payment-button{
+    padding-bottom: 15px;
+  }
+  .studentProfile_p{
+    font-size: 16px;
+  }
+}
+#payment-item {
+  border-bottom: 1px solid rgb(189, 189, 189);
+}
+#payment-item:last-of-type {
+  border-bottom: none;
+}
+#payment-info {
+  max-width: 400px;
+}
+@media(min-width:897px) and (max-width:950px){
+  #payment-info {
+    max-width: 350px;
+  }
+}
+@media(min-width:767px) and (max-width:897px){
+  #payment-info {
+    max-width: 250px;
+  }
+}
+@media(min-width:557px) and (max-width:719px){
+  #payment-info {
+    max-width: 250px; 
+    margin: 0 auto;
+  }
+}
+@media(max-width:556px){
+  #payment-info {
+    margin: 0 auto;
+  }
+}
+#payment-info h5{
+  line-height: 10px;
+}
+#payment-info p {
+  font-size: 16px;
+  color: gray;
+}
+#payment-info span {
+  font-weight: 700;
+  font-size: 15px;
 }

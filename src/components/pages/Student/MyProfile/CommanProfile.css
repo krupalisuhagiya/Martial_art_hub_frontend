@@ -1,0 +1,123 @@
+.studentProfile_div {
+  padding-bottom: 20px;
+  padding-left: 52px;
+  padding-right: 52px;
+  background-color: black;
+  margin-top: 60px;
+}
+.studentProfile_container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.student_profile_FaQuoteRight {
+  text-align: right;
+  margin-top: 83px;
+  color: rgb(82, 82, 82);
+  font-size: 35px;
+}
+.studentProfile_p {
+  text-align: right;
+  max-width: 465px;
+  color: white;
+  font-size: 26px;
+  margin-top: -13px;
+}
+.studentProfile_container1 {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.student_profile_img {
+  border-radius: 50%;
+  max-width: 250px;
+  height: 250px;
+  margin-top: 20px;
+  border: 4px solid #e1dfd7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(168, 168, 168);
+}
+@media (max-width: 992px) {
+  .student_profile_img {
+    height: 175px;
+  }
+}
+@media (max-width: 767px) {
+  .student_profile_img {
+    height: 175px;
+    margin: 0 auto;
+    width: 175px;
+  }
+}
+
+.student_profile_im_span {
+  font-size: 150px;
+}
+#navbaratagmenu {
+  border: none;
+}
+#navbaratagmenu .nav-link {
+  padding: 19px 0;
+}
+.student_profile_namespan {
+  font-size: 20px;
+  color: gray;
+  font-weight: 400;
+  margin-left: 5px;
+}
+.studentprofile_complete {
+  width: 120px;
+  height: 25px;
+  background-color: #c7c6bf;
+  border-radius: 9999px;
+}
+.studentprofile_complete_75 {
+  width: 90px;
+  height: 25px;
+  background-color: #34b175;
+  border-radius: 9999px;
+  text-align: center;
+  font-size: 15px;
+  color: white;
+}
+.studentprofile_mainpart {
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 576px) {
+  .studentprofile_mainpart {
+    display: block;
+  }
+  #instuctor_profile_button button {
+    width: 100%;
+    height: 62px;
+    font-size: 20px;
+  }
+  .studentprofile_complete {
+    width: 100%;
+  }
+  .studentprofile_complete_75 {
+    width: 75%;
+  }
+  .student_profile_img {
+    margin-top: 25px;
+  }
+}
+@media (max-width: 576px) {
+  #myprofile-informatino {
+    display: block;
+  }
+  #myprofile2 {
+    margin-top: 15px;
+  }
+  .student_profile_add_details {
+    margin-top: 20px;
+  }
+}
+#student_profile_add_about {
+  height: 150px;
+}
+.save {
+  padding: 10px 70px;
+}

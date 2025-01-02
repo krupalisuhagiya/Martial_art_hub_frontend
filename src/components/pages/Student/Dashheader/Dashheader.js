@@ -9,6 +9,7 @@ import classimg11 from "../../../../image/11.png";
 import paymentimg1 from "../../../../image/8.png";
 import paymentimg2 from "../../../../image/9.png";
 import { MdOutlineArrowOutward } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 function Dashheader() {
   const [user, setUser] = useState({ email: "", name: "" });
@@ -96,6 +97,10 @@ function Dashheader() {
       btnname: "see Details",
     },
   ];
+  const navigate = useNavigate();
+  const StudentProfilenavigate = () => {
+    navigate("/StudentProfile");
+  };
 
   return (
     <div>
@@ -134,7 +139,7 @@ function Dashheader() {
                     <span>Profile Completion:</span>
                     {profile.ProfileCompletion}
                   </p>
-                  <p className="complete">{profile.Complete}</p>
+                  <p className="complete" onClick={StudentProfilenavigate}>{profile.Complete}</p>
                 </div>
               </div>
             </div>

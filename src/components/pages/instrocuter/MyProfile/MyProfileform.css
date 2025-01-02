@@ -131,15 +131,15 @@
 }
 .navbaratagmenu .nav-link.active {
   font-weight: bold;
+  text-decoration: underline;
 }
 .navbaratagmenu .nav-link.active::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: 8px;
+  bottom: 0;
   transform: translateY(-50%);
-  /* width: 100%; */
-  height: 2px;
+  height: 0;
   background-color: black;
 }
 

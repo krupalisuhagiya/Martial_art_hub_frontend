@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./Home.css";
 import img1 from "../../../../image/1.png";
 import img2 from "../../../../image/2.png";
@@ -19,9 +19,10 @@ import "slick-carousel/slick/slick-theme.css";
 import { FaArrowRightLong, FaStar } from "react-icons/fa6";
 import { Accordion } from "react-bootstrap";
 import Footer from "../../../comman/Footer";
-import { GoHeart } from "react-icons/go";
 import Slider1 from "../../../comman/Slider1";
 import Getintouch from "../../../comman/Getintouch";
+import { IoIosHeart } from "react-icons/io";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Home() {
   // -------------------------------------slider-2----------------------------------------
@@ -59,7 +60,7 @@ function Home() {
       image: img11,
       star: <FaStar />,
       number: "4.3(1200 Ratings)",
-      head1: "Yash",
+      head1: "Jhon Martin",
       text1: "experience in 30 yesr of marshlat and also many filed......",
     },
 
@@ -82,13 +83,36 @@ function Home() {
       image: img14,
       star: <FaStar />,
       number: "4.3(1200 Ratings)",
-      head1: "Jay",
+      head1: "Kiya Jhon",
       text1: "experience in 20 yesr of marshlat and also many filed......",
     },
   ];
+  // ---------------scroll section--------------------
+  const homeRef = useRef(null);
+  const aboutUsRef = useRef(null);
+  const contactUsRef = useRef(null);
+  const location = useLocation();
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const section = params.get("section");
+
+    if (section === "AboutUs" && aboutUsRef.current) {
+      aboutUsRef.current.scrollIntoView({ behavior: "smooth" });
+    } else if (section === "ContactUs" && contactUsRef.current) {
+      contactUsRef.current.scrollIntoView({ behavior: "smooth" });
+    } else if (location.pathname === "/" && homeRef.current) {
+      homeRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [location]);
+
+  const navigate = useNavigate();
+  const viewMore=()=>{
+    navigate("/Student_InstructorViewProfile")
+  }
+
   return (
     <div>
-      <div className="home-1">
+      <div className="home-1" id="home" ref={homeRef}>
         <h1 className="text-center">martial arts hub.</h1>
         <p className="text-center">
           The place to begin or elevate your martial arts journey. Created by
@@ -173,7 +197,11 @@ function Home() {
           </div>
         </div>
       </section>
-      <section className="py-20 px-3 lg:px-8 section-4">
+      <section
+        className="py-20 px-3 lg:px-8 section-4"
+        ref={aboutUsRef}
+        id="about-us"
+      >
         <h2 className="title">martial arts hub.</h2>
         <div style={{ marginTop: "-35px" }}>
           <h2>Who we are</h2>
@@ -209,9 +237,10 @@ function Home() {
         <h2>Ready to Learn?</h2>
         <p>
           Ready to learn martial arts but need some direction? Don’t worry,
-          we've got you covered. Join Us online classes and learn from world-class martial arts
-          instructors. Train at your own pace and master the art of self-defense
-          or message our instructors for personalized guidance.
+          we've got you covered. Join Us online classes and learn from
+          world-class martial arts instructors. Train at your own pace and
+          master the art of self-defense or message our instructors for
+          personalized guidance.
         </p>
         <div className="two-button">
           <button className="rounded-pill">
@@ -368,7 +397,8 @@ function Home() {
                       style={{ width: "100%" }}
                     />
                     <div className="div-heart">
-                      <GoHeart className="heart" />
+                      <IoIosHeart className="heart" />
+                      {/* <GoHeart className="heart" /> */}
                     </div>
                   </div>
                   <div className="d-flex" style={{ marginTop: "8px" }}>
@@ -393,7 +423,7 @@ function Home() {
                   <p>{item.text1}</p>
                   <p>{item.button1}</p>
 
-                  <button className="rounded-pill view">View Profile</button>
+                  <button className="rounded-pill view" onClick={viewMore}>View Profile</button>
                   <button className="rounded-pill view send">
                     Send a Message
                   </button>
@@ -538,7 +568,7 @@ function Home() {
       <section>
         <Getintouch />
       </section>
-      <footer>
+      <footer id="contact-us" ref={contactUsRef}>
         <Footer />
       </footer>
     </div>

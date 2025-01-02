@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import Slider from "react-slick";
 import img6 from "../../image/6.png";
@@ -7,6 +7,7 @@ import img8 from "../../image/8.png";
 import img9 from "../../image/9.png";
 import Button from "../comman/Buttoncomman";
 import "../comman/Slider1.css";
+import { Modal } from "react-bootstrap";
 
 function Slider1() {
   const settings = {
@@ -65,6 +66,18 @@ function Slider1() {
       button: <Button text={"Read More"} />,
     },
   ];
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const handleGetOTP = (item) => {
+    setSelectedItem(item);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedItem(null);
+  };
+
   return (
     <div>
       <section className="explore ">
@@ -94,13 +107,30 @@ function Slider1() {
                   />
                   <h3>{item.head}</h3>
                   <p>{item.text}</p>
-                  <p>{item.button}</p>
+                  <p onClick={() => handleGetOTP(item)}>{item.button}</p>
                 </div>
               ))}
             </Slider>
           </div>
         </div>
       </section>
+      <Modal show={isModalOpen} onHide={handleCloseModal} dialogClassName="custom-modal_slider1">
+        <Modal.Body style={{borderRadius:"8px"}}>
+          {selectedItem && (
+            <div className="myprofile-informatino" id="myprofile-informatino">
+              <div className="myprofile1">
+                <img
+                  src={selectedItem.img}
+                  alt="Selected Slide"
+                  style={{ width: "100%", height: "450px" }}
+                />
+                <input value={selectedItem.head} className="slider1_details_popup"/><br/>
+                <textarea value={selectedItem.text} className="slider1_details_popup"/>
+              </div>
+            </div>
+          )}
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }
