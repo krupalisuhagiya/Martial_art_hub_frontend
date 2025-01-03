@@ -12,6 +12,7 @@ import "./ForgotPassword.css";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Modal } from "react-bootstrap";
+import baseUrl from "../../../../../baseUrl";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -99,50 +100,62 @@ function ForgotPassword() {
   };
 
   // -----------------------------create password-----------------
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [formData, setFormData] = useState({
+    NewPassword: "",
+    confrim_password: "",
+    studentId: "",
+  });
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
     setPasswordError("");
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
     setConfirmPasswordError("");
   };
   const validatePasswords = () => {
-    let isValid = true;
-
-    if (!password) {
-      setPasswordError("Enter your password.");
-      isValid = false;
+    const newErrors = {};
+    if (!formData.NewPassword) {
+      newErrors.NewPassword = "Please enter your password";
     }
 
-    if (!confirmPassword) {
-      setConfirmPasswordError("Re-enter your password.");
-      isValid = false;
-    }
-
-    if (password && confirmPassword && password !== confirmPassword) {
+    if (
+      formData.NewPassword &&
+      formData.confrim_password &&
+      formData.NewPassword !== formData.confrim_password
+    ) {
       setConfirmPasswordError("Passwords do not match.");
-      isValid = false;
     }
-    return isValid;
   };
+
   const handleCreatePassword = async () => {
-    if (!validatePasswords()) return;
+    validatePasswords(); // Validate passwords before proceeding
+
+    if (passwordError || confirmPasswordError) {
+      return; // Stop if there are errors
+    }
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/studentforgotpassword",
-        {
-          email: user.email,
-          password,
-        }
-      );
+      const response = await axios.post(`${baseUrl}/student/newpassword`, {
+        NewPassword: formData.NewPassword, // Use formData.NewPassword
+        confrim_password: formData.confrim_password, // Use formData.confrim_password
+      });
+
+      if (response.status === 201 || response.status === 200) {
+        setUser({
+          NewPassword: formData.NewPassword,
+          confrim_password: formData.confrim_password,
+        });
+
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            NewPassword: formData.NewPassword,
+            confrim_password: formData.confrim_password,
+          })
+        );
+      }
       console.log(response);
 
       toast.success("Password created successfully!");
@@ -151,6 +164,7 @@ function ForgotPassword() {
       toast.error("Failed to create password. Please try again.");
     }
   };
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState(false);
@@ -161,17 +175,17 @@ function ForgotPassword() {
       toast.error("Please fill out all OTP fields!"); // Show toast for empty fields
       return;
     }
-    const otpValue = otp.join(""); 
+    const otpValue = otp.join("");
     console.log("OTP Submitted:", otpValue);
     closeSecondModal();
   };
   // Function to handle the backdrop click
-const handleBackdropClick = () => {
-  // Only close the modal when clicked outside (no other action)
-  closeFirstModal();
-  closeSecondModal();
-  setIThirddModalOpen(false);
-};
+  const handleBackdropClick = () => {
+    // Only close the modal when clicked outside (no other action)
+    closeFirstModal();
+    closeSecondModal();
+    setIThirddModalOpen(false);
+  };
   return (
     <div>
       <div className="studentProfile_div">
@@ -262,7 +276,6 @@ const handleBackdropClick = () => {
           </button>
         </Modal.Body>
       </Modal>
-      
 
       {/* ----------------second modal popup */}
       <Modal
@@ -370,7 +383,8 @@ const handleBackdropClick = () => {
               <input
                 type={isPasswordVisible ? "text" : "password"}
                 placeholder="Create Password"
-                value={password}
+                name="NewPassword" // Add name attribute
+                value={formData.NewPassword}
                 onChange={handlePasswordChange}
                 className="student_craete_password"
               />
@@ -395,11 +409,11 @@ const handleBackdropClick = () => {
               <input
                 type={isConfirmPasswordVisible ? "text" : "password"}
                 placeholder="Re-enter Password"
-                value={confirmPassword}
-                onChange={handleConfirmPasswordChange}
+                name="confrim_password" // Add name attribute
+                value={formData.confrim_password}
+                onChange={handlePasswordChange}
                 className="student_craete_password"
               />
-
               <span
                 onClick={() =>
                   setIsConfirmPasswordVisible(!isConfirmPasswordVisible)

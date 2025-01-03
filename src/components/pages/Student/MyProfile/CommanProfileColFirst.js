@@ -23,15 +23,13 @@ function CommanProfileColFirst() {
     }
   }, []);
 
+  
   useEffect(() => {
     const storedProfile = localStorage.getItem("userProfile");
     if (storedProfile) {
       const parsedProfile = JSON.parse(storedProfile);
       setProfile(parsedProfile);
-
-      // Use the profile picture URL or base64 string stored
-      const profilePic = parsedProfile.profile_picture || null;
-      setProfilePicture(profilePic);
+      setProfilePicture(parsedProfile.profile_picture || null);
     }
   }, []);
  
@@ -72,7 +70,7 @@ function CommanProfileColFirst() {
       <div className="studentProfile_container1">
         <div className="student_profile_img">
           {profilePicture ? (
-            <img src={profilePicture} alt="Profile" />
+            <img src={profilePicture} alt="Profile" style={{width:"250px", height:"250px",border:"1px solid black",borderRadius:"50%"}}/>
           ) : (
             <div className="default-profile-picture">
               <span className="student_profile_im_span">

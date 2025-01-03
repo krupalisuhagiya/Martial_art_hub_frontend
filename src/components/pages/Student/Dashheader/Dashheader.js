@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 function Dashheader() {
   const [user, setUser] = useState({ email: "", name: "" });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -97,7 +98,36 @@ function Dashheader() {
       btnname: "see Details",
     },
   ];
-  const navigate = useNavigate();
+
+  // ----------------------------------profile picture----------
+  const [profile, setProfile] = useState(null);
+  const [profilePicture, setProfilePicture] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setUser({ email: parsedUser.email, name: parsedUser.name });
+      } catch (error) {
+        setUser({ email: storedUser, name: "" });
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const storedProfile = localStorage.getItem("userProfile");
+    if (storedProfile) {
+      const parsedProfile = JSON.parse(storedProfile);
+      setProfile(parsedProfile);
+      setProfilePicture(parsedProfile.profile_picture || null);
+    }
+  }, []);
+
+  if (!profile) {
+    return <div>Loading...</div>;
+  }
+  // --------------------------------------------------
   const StudentProfilenavigate = () => {
     navigate("/StudentProfile");
   };
@@ -110,15 +140,30 @@ function Dashheader() {
           {stdpro.map((profile, index) => (
             <div key={index} className="profile-section">
               <div className="icon-container">
-                <span className="usericonefont">
-                  {user.email && /^[A-Za-z]/.test(user.email)
-                    ? user.email.charAt(0).toUpperCase()
-                    : ""}
-                </span>
-                <div className="camera">
+                {profilePicture ? (
+                  <img
+                    src={profilePicture}
+                    alt="Profile"
+                    style={{
+                      width: "210px",
+                      height: "210px",
+                      border: "1px solid black",
+                      borderRadius: "50%",
+                      marginLeft: "35px",
+                    }}
+                  />
+                ) : (
+                  <span className="usericonefont">
+                    {user.email && /^[A-Za-z]/.test(user.email)
+                      ? user.email.charAt(0).toUpperCase()
+                      : "N/A"}
+                  </span>
+                )}
+                <div className="camera" onClick={StudentProfilenavigate}>
                   <HiOutlineCamera />
                 </div>
               </div>
+
               <div className="profile-details">
                 <div className="nameonly">
                   <h2>{user.name || "No Name Found"}</h2>
@@ -139,7 +184,9 @@ function Dashheader() {
                     <span>Profile Completion:</span>
                     {profile.ProfileCompletion}
                   </p>
-                  <p className="complete" onClick={StudentProfilenavigate}>{profile.Complete}</p>
+                  <p className="complete" onClick={StudentProfilenavigate}>
+                    {profile.Complete}
+                  </p>
                 </div>
               </div>
             </div>

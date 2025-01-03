@@ -45,10 +45,16 @@ function CommanProfileColSecond() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormData({ ...formData, profile_picture: file });
-      setProfilePicture(URL.createObjectURL(file));
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64Image = reader.result;
+        setFormData({ ...formData, profile_picture: base64Image });
+        setProfilePicture(base64Image);
+      };
+      reader.readAsDataURL(file);
     }
   };
+  
   const validateform = () => {
     const newErrors = {};
     if (!formData.aboutMe) newErrors.aboutMe = "aboutMe is required.";
