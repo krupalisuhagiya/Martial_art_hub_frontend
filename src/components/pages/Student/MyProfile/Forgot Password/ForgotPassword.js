@@ -879,7 +879,7 @@ function ForgotPassword() {
         <Footer />
       </div>
     </div>
-  );
+  ); 
 }
 
 export default ForgotPassword;
