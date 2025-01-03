@@ -182,6 +182,7 @@ function CommanProfileColSecond() {
                       src={profilePicture}
                       alt="Profile Preview"
                       className="profile-picture-preview"
+                      style={{height:"100%",width:"100%"}}
                     />
                   )}
                 </div>
