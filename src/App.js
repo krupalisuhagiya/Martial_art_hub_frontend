@@ -18,7 +18,7 @@ import Negotiation from "./components/pages/Student/RaiseDispute/Negotiation";
 import Arbitration from "./components/pages/Student/RaiseDispute/Arbitration";
 import StudentProfile from "./components/pages/Student/MyProfile/MyProfile/StudentProfile";
 import LogInDetails from "./components/pages/Student/MyProfile/Log In Details/LogInDetails";
-import ForgotPassword from "./components/pages/Student/MyProfile/Forgot Password/ForgotPassword";
+// import ForgotPassword from "./components/pages/Student/MyProfile/Forgot Password/ForgotPassword";
 import Categories from "./components/pages/Student/Categories/Categories";
 import ResetPassword from "./components/pages/Student/MyProfile/Reset Password/ResetPassword";
 import FavoriteInstructors from "./components/pages/Student/MyProfile/Favorite Instructors/FavoriteInstructors";
@@ -70,7 +70,7 @@ function App() {
         <Route path="/Arbitration" element={<Arbitration />} />
         <Route path="/StudentProfile" element={<StudentProfile />} />
         <Route path="/Student_login_details" element={<LogInDetails />} />
-        <Route path="/Student_forgot_password" element={<ForgotPassword />} />
+        {/* <Route path="/Student_forgot_password" element={<ForgotPassword />} /> */}
         <Route path="/Student_ResetPassword" element={<ResetPassword />} />
         <Route path="/Student_Favorite_Instructors" element={<FavoriteInstructors />} />
         <Route path="/Student_Booking_History" element={<BookingHistory />} />
