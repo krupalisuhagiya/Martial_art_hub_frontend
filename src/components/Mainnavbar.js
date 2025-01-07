@@ -11,6 +11,7 @@ import eyeslash from "../../src/image/eyeslash.png";
 import "../components/Mainnavbar.css";
 import { TiWarning } from "react-icons/ti";
 import baseUrl from "../baseUrl";
+import { ToastContainer, toast } from "react-toastify";
 
 function Mainnavbar({ text }) {
   const dropdownItems = [
@@ -68,6 +69,9 @@ function Mainnavbar({ text }) {
     if (!formData.email || !emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
+    if (!formData.password) {
+      newErrors.password = "please enter your password";
+    }
     if (formData.password !== formData.confrim_password && !isLoginView) {
       newErrors.confrim_password = "Passwords do not match.";
     }
@@ -77,34 +81,43 @@ function Mainnavbar({ text }) {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+  // -----loading
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCreateAccount = async () => {
-    if (validateForm()) {
-      try {
-        const response = await axios.post(`${baseUrl}/student/signup`, {
+    setIsLoading(true);
+    if (!validateForm()) {
+      setIsLoading(false); // लोडर बंद करें यदि फॉर्म वैध नहीं है
+      toast.error("Please correct the errors in the form.");
+      return;
+    }
+    try {
+      const response = await axios.post(`${baseUrl}/student/signup`, {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        confrim_password: formData.confrim_password,
+      });
+      if (response.status === 201 || response.status === 200) {
+        setUser({
           name: formData.name,
           email: formData.email,
-          password: formData.password,
-          confrim_password: formData.confrim_password,
         });
-        if (response.status === 201 || response.status === 200) {
-          setUser({
-            name: formData.name,
-            email: formData.email,
-          });
 
-          localStorage.setItem(
-            "user",
-            JSON.stringify({ name: formData.name, email: formData.email })
-          );
-          setShowSuccessModal(true);
-        }
-      } catch (error) {
-        setErrors({
-          signup:
-            error.response?.data.message || "Signup failed. Please try again.",
-        });
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ name: formData.name, email: formData.email })
+        );
+        setShowSuccessModal(true);
       }
+    } catch (error) {
+      if (error.response) {
+        toast.error(
+          error.response.data.message || error.response.data || error.response
+        );
+      }
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -114,6 +127,9 @@ function Mainnavbar({ text }) {
     if (!formData.email || !emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
+    if (!formData.password) {
+      newErrors.password = "Please enter your password";
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -121,41 +137,42 @@ function Mainnavbar({ text }) {
   const [showLoginSuccessModal, setShowLoginSuccessModal] = useState(false);
 
   const handleLogin = async () => {
-    if (validateLoginForm()) {
-      try {
-        const response = await axios.post(`${baseUrl}/student/login`, {
-          email: formData.email,
-          password: formData.password,
+    setIsLoading(true);
+    if (!validateLoginForm()) {
+      setIsLoading(false);
+      return;
+    }
+    try {
+      const response = await axios.post(`${baseUrl}/student/login`, {
+        email: formData.email,
+        password: formData.password,
+      });
+      const { name, email } = response.data.data;
+      localStorage.setItem("StudentToken", response.data.Token);
+      localStorage.setItem("studentId", response.data.data._id);
+      if (response.status === 201 || response.status === 200) {
+        setUser({
+          name: name,
+          email: email,
         });
-        const { name, email } = response.data.data;
-        localStorage.setItem("StudentToken", response.data.Token);
-        localStorage.setItem("studentId", response.data.data._id);
-        if (response.status === 201 || response.status === 200) {
-          setUser({
-            name: name,
-            email: email,
-          });
 
-          localStorage.setItem(
-            "user",
-            JSON.stringify({ name: name, email: email }) 
-          );
-          setShowLoginSuccessModal(true);
-        }
-      } catch (error) {
-        if (error.response) {
-          setErrors({
-            ...errors,
-            login:
-              error.response.data.message || "Login failed. Please try again.",
-          });
-        } else {
-          setErrors({ ...errors, login: "An unexpected error occurred." });
-        }
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ name: name, email: email })
+        );
+        setShowLoginSuccessModal(true);
       }
+    } catch (error) {
+      if (error.response) {
+        toast.error(
+          error.response.data.message || error.response.data || error.response
+        );
+      }
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
-
+  
   const handleLogout = () => {
     setShowLogoutConfirm(true);
     navigate("/");
@@ -207,7 +224,17 @@ function Mainnavbar({ text }) {
     }
   };
   // ---------------------------difrent css header-------------
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [profile, setProfile] = useState(null);
 
+  useEffect(() => {
+    const storedProfile = localStorage.getItem("userProfile");
+    if (storedProfile) {
+      const parsedProfile = JSON.parse(storedProfile);
+      setProfile(parsedProfile);
+      setProfilePicture(parsedProfile.profile_picture || null);
+    }
+  }, []);
   return (
     <div id="main-content">
       <header className="top-0 left-0 z-[9] bg-transparent fixed-top">
@@ -291,7 +318,24 @@ function Mainnavbar({ text }) {
                       id="dropdown-basic"
                       className="rounded-circle"
                     >
-                      {user.email.charAt(0).toUpperCase()}
+                      {profilePicture ? (
+                        <img
+                          src={profilePicture}
+                          alt="Profile"
+                          style={{
+                            width: "30px",
+                            height: "30px",
+                            border: "1px solid black",
+                            borderRadius: "50%",
+                            // marginLeft: "35px",
+                            // ------------
+                            marginLeft: "0",
+                          }}
+                        />
+                      ) : (
+                        <span>{user.email.charAt(0).toUpperCase()}</span>
+                      )}
+                      {/* {user.email.charAt(0).toUpperCase()} */}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       {localStorage.getItem("Role") === "Student"
@@ -484,8 +528,21 @@ function Mainnavbar({ text }) {
                             type="button"
                             onClick={handleLogin}
                             className="account rounded-pill"
+                            disabled={isLoading}
                           >
-                            Log In to your account
+                            {isLoading ? (
+                              <div
+                                className="spinner-border text-light"
+                                role="status"
+                                style={{ width: "1rem", height: "1rem" }}
+                              >
+                                <span className="visually-hidden">
+                                  Loading...
+                                </span>
+                              </div>
+                            ) : (
+                              "Log In to your account"
+                            )}
                           </button>
                           <button className="google rounded-pill">
                             <FaGoogle />
@@ -609,8 +666,21 @@ function Mainnavbar({ text }) {
                             type="button"
                             onClick={handleCreateAccount}
                             className="account rounded-pill"
+                            disabled={isLoading}
                           >
-                            Create Account
+                            {isLoading ? (
+                              <div
+                                className="spinner-border text-light"
+                                role="status"
+                                style={{ width: "1rem", height: "1rem" }}
+                              >
+                                <span className="visually-hidden">
+                                  Loading...
+                                </span>
+                              </div>
+                            ) : (
+                              "Create Account"
+                            )}
                           </button>
 
                           <button className="google rounded-pill">
@@ -756,6 +826,7 @@ function Mainnavbar({ text }) {
           </Modal.Body>
         </Modal>
       </header>
+      <ToastContainer />
     </div>
   );
 }

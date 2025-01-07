@@ -25,6 +25,7 @@ import FavoriteInstructors from "./components/pages/Student/MyProfile/Favorite I
 import BookingHistory from "./components/pages/Student/MyProfile/Booking History/BookingHistory";
 import InstructorViewProfile from "./components/pages/Student/InstructorViewProfile/InstructorViewProfile";
 
+
 function App() {
   const navItem = [
     {
@@ -79,6 +80,8 @@ function App() {
         {/* ----------------------instructor part------------------------------ */}
         <Route path="/Instuctorsignup" element={<Instuctorsignup />} />
         <Route path="/MyProfileform" element={<MyProfileform />} />
+        <Route path="/MyProfile" element={<MyProfile/>}></Route>
+        
       </Routes>
     </div>
   );

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import "./Instuctorsignup.css";
 import Footer from "../../../comman/Footer";
 import baseUrl from "../../../../baseUrl";
+import { ToastContainer, toast } from "react-toastify";
 
 function Instuctorsignup() {
   const navigate = useNavigate();
@@ -37,30 +38,37 @@ function Instuctorsignup() {
     }
   }, []);
   const handleCreateAccount = async () => {
-    if (validateForm()) {
-      try {
-        const response = await axios.post(`${baseUrl}/instructor/signup`, {
-          email: formData.email,
-          password: formData.password,
-          confirm_password: formData.confirmPassword,
-        });
-        if (response.status === 201 || response.status === 200) {
-          setUser({
-            email: formData.email,
-          });
+    setIsLoading(true);
 
-          localStorage.setItem(
-            "user",
-            JSON.stringify({ email: formData.email })
-          );
-          setShowSuccessModal(true);
-        }
-      } catch (error) {
-        setErrors({
-          signup:
-            error.response?.data.message || "Signup failed. Please try again.",
+    if (!validateForm()) {
+      setIsLoading(false); 
+      toast.error("Please correct the errors in the form.");
+      return;
+    }
+    try {
+      const response = await axios.post(`${baseUrl}/instructor/signup`, {
+        email: formData.email,
+        password: formData.password,
+        confirm_password: formData.confirmPassword,
+      });
+      console.log(response.data.message);
+
+      if (response.status === 201 || response.status === 200) {
+        setUser({
+          email: formData.email,
         });
+
+        localStorage.setItem("user", JSON.stringify({ email: formData.email }));
+        setShowSuccessModal(true);
       }
+    } catch (error) {
+      if (error.response) {
+        toast.error(
+          error.response.data.message || error.response.data || error.response
+        );
+      }
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
   const togglePasswordVisibility = () =>
@@ -70,6 +78,9 @@ function Instuctorsignup() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email || !emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
+    }
+    if (!formData.password) {
+      newErrors.password = "Please enter your password";
     }
     if (formData.password !== formData.confirmPassword && !isLoginView) {
       newErrors.confirmPassword = "Passwords do not match.";
@@ -93,43 +104,48 @@ function Instuctorsignup() {
   };
   const [showLoginSuccessModal, setShowLoginSuccessModal] = useState(false);
 
+  // -------loading
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleLogin = async () => {
-    if (validateLoginForm()) {
-      try {
-        const response = await axios.post(`${baseUrl}/instructor/login`, {
+    setIsLoading(true);
+
+    if (!validateLoginForm()) {
+      setIsLoading(false); 
+      toast.error("Please correct the errors in the form.");
+      return;
+    }
+    try {
+      const response = await axios.post(`${baseUrl}/instructor/login`, {
+        email: formData.email,
+        password: formData.password,
+      });
+
+      localStorage.setItem("InstructorToken", response.data.Token);
+      localStorage.setItem("instructorId", response.data.data._id);
+
+      if (response.status === 201 || response.status === 200) {
+        setUser({
+          name: formData.name,
           email: formData.email,
-          password: formData.password,
         });
 
-        console.log(response);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ name: formData.name, email: formData.email })
+        );
+        closeLoginModal();
+        setShowLoginSuccessModal(true);
 
-        localStorage.setItem("InstructorToken", response.data.Token);
-        localStorage.setItem("instructorId", response.data.data._id);
-
-        if (response.status === 201 || response.status === 200) {
-          setUser({
-            name: formData.name,
-            email: formData.email,
-          });
-
-          localStorage.setItem(
-            "user",
-            JSON.stringify({ name: formData.name, email: formData.email })
-          );
-          closeLoginModal();
-          setShowLoginSuccessModal(true);
-        }
-      } catch (error) {
-        if (error.response) {
-          setErrors({
-            ...errors,
-            login:
-              error.response.data.message || "Login failed. Please try again.",
-          });
-        } else {
-          setErrors({ ...errors, login: "An unexpected error occurred." });
-        }
       }
+    } catch (error) {
+      if (error.response) {
+        toast.error(
+          error.response.data.message || error.response.data || error.response
+        );
+      }
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
   const closeSuccessModal = () => {
@@ -139,8 +155,9 @@ function Instuctorsignup() {
   };
   const closeloginSuccessModal = () => {
     setShowLoginSuccessModal(false);
-    navigate("/DashboardInstructor");
+    navigate("/MyProfile");
     localStorage.setItem("Role", "Instructor");
+    window.location.reload();
   };
 
   return (
@@ -218,10 +235,23 @@ function Instuctorsignup() {
                         <div className="tobtn" id="tobtn">
                           <button
                             type="button"
-                            onClick={handleLogin}
+                            onClick={handleLogin} 
                             className="account rounded-pill"
+                            disabled={isLoading}
                           >
-                            Log In to your account
+                            {isLoading ? (
+                              <div
+                                className="spinner-border text-light"
+                                role="status"
+                                style={{ width: "1rem", height: "1rem" }}
+                              >
+                                <span className="visually-hidden">
+                                  Loading...
+                                </span>
+                              </div>
+                            ) : (
+                              "Log In to your account"
+                            )}
                           </button>
                           <button className="google rounded-pill">
                             <FaGoogle />
@@ -327,8 +357,21 @@ function Instuctorsignup() {
                             type="button"
                             onClick={handleCreateAccount}
                             className="account rounded-pill"
+                            disabled={isLoading}
                           >
-                            Create Account
+                            {isLoading ? (
+                              <div
+                                className="spinner-border text-light"
+                                role="status"
+                                style={{ width: "1rem", height: "1rem" }}
+                              >
+                                <span className="visually-hidden">
+                                  Loading...
+                                </span>
+                              </div>
+                            ) : (
+                              "Create Account"
+                            )}
                           </button>
 
                           <button className="google rounded-pill">
@@ -442,6 +485,7 @@ function Instuctorsignup() {
       <div>
         <Footer />
       </div>
+      <ToastContainer />
     </div>
   );
 }

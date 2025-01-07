@@ -139,7 +139,7 @@ function Dashheader() {
         <div className="std-dash col-lg-3">
           {stdpro.map((profile, index) => (
             <div key={index} className="profile-section">
-              <div className="icon-container">
+              <div className="icon-container" style={{position:"relative"}}>
                 {profilePicture ? (
                   <img
                     src={profilePicture}
@@ -149,7 +149,9 @@ function Dashheader() {
                       height: "210px",
                       border: "1px solid black",
                       borderRadius: "50%",
-                      marginLeft: "35px",
+                      // marginLeft: "35px",
+                      // ------------
+                      marginLeft:"0",
                     }}
                   />
                 ) : (

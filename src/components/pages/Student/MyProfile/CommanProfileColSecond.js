@@ -54,20 +54,25 @@ function CommanProfileColSecond() {
       reader.readAsDataURL(file);
     }
   };
-  
+
   const validateform = () => {
     const newErrors = {};
     if (!formData.aboutMe) newErrors.aboutMe = "aboutMe is required.";
     if (!formData.additionlDetail)
-      newErrors.additionlDetail = "aboutMe is required.";
+      newErrors.additionlDetail = "additionlDetail is required.";
+
     setError(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  
+
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateform()) return;
-
+    setIsLoading(true);
+    if (!validateform()) {
+      setIsLoading(false);
+      return;
+    }
     const body = new FormData();
     body.append("name", formData.name);
     body.append("profile_picture", formData.profile_picture);
@@ -101,10 +106,11 @@ function CommanProfileColSecond() {
       window.location.reload();
     } catch (error) {
       toast.error("Failed to update profile. Please try again.");
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
-  
   return (
     <div>
       <div className="studentprofile_mainpart">
@@ -182,7 +188,7 @@ function CommanProfileColSecond() {
                       src={profilePicture}
                       alt="Profile Preview"
                       className="profile-picture-preview"
-                      style={{height:"100%",width:"100%"}}
+                      style={{ height: "100%", width: "100%" }}
                     />
                   )}
                 </div>
@@ -222,8 +228,19 @@ function CommanProfileColSecond() {
               type="button"
               onClick={handleSubmit}
               className="okay save rounded-pill"
+              disabled={isLoading}
             >
-              Save
+              {isLoading ? (
+                <div
+                  className="spinner-border text-light"
+                  role="status"
+                  style={{ width: "1rem", height: "1rem" }}
+                >
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                "Save"
+              )}
             </button>
           </div>
         </Modal.Body>

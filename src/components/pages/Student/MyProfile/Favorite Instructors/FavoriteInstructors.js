@@ -106,18 +106,18 @@ function FavoriteInstructors() {
   const [favoriteInstructors, setFavoriteInstructors] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/Favorite_Instructors")
-      .then((response) => {
-        setFavoriteInstructors(response.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch data:", err);
-        setLoading(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3000/Favorite_Instructors")
+  //     .then((response) => {
+  //       setFavoriteInstructors(response.data);
+  //       setLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Failed to fetch data:", err);
+  //       setLoading(false);
+  //     });
+  // }, []);
 
   return (
     <div>

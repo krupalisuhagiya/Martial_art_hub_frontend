@@ -11,6 +11,23 @@
 .btn:first-child:active{
   background-color: black;
 } */
+ /* ------------loading */
+ .spinner-border {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 0.1em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spinner-border 0.75s linear infinite;
+}
+
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 header {
   /* ----- */
   top: 0;

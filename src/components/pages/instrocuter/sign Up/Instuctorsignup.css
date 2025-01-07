@@ -11,18 +11,34 @@
   max-width: 1000px;
   margin: 0 auto;
 }
-.login-model{
-    margin: 10px;
+.login-model {
+  margin: 10px;
 }
-#welcome1{
-    margin-top: 50px;
+#welcome1 {
+  margin-top: 50px;
 }
-#welcome1 img{
-    height: 669px;
+#welcome1 img {
+  height: 669px;
 }
-#tobtn{
-    margin-top: 1.75rem;
+#tobtn {
+  margin-top: 1.75rem;
 }
-.form-arrow{
+.form-arrow {
   cursor: pointer;
+}
+/* -------------loading */
+.spinner-border {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 0.1em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spinner-border 0.75s linear infinite;
+}
+
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg);
+  }
 }

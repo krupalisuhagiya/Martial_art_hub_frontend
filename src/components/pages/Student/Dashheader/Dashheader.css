@@ -58,7 +58,7 @@
   align-items: center;
   font-size: 100px;
   color: black;
-  margin-left: 78px;
+  /* margin-left: 78px; */
 }
 
 .usericone {
@@ -79,8 +79,11 @@
   height: 48px;
   width: 48px;
   margin-top: 60%;
-  margin-left: 11%;
   cursor: pointer;
+  /* margin-left: 11%; */
+  /* ------ */
+  margin-left: 84%;
+  position: absolute;
 }
 .role {
   padding-top: 40px;

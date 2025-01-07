@@ -150,7 +150,7 @@ function MyProfile() {
   // Success modal close
   const closeSuccessModal = () => {
     setShowSuccessModal(false);
-    navigate("/");
+    navigate("/DashboardInstructor");
   };
 
   return (
