@@ -24,7 +24,7 @@ import ResetPassword from "./components/pages/Student/MyProfile/Reset Password/R
 import FavoriteInstructors from "./components/pages/Student/MyProfile/Favorite Instructors/FavoriteInstructors";
 import BookingHistory from "./components/pages/Student/MyProfile/Booking History/BookingHistory";
 import InstructorViewProfile from "./components/pages/Student/InstructorViewProfile/InstructorViewProfile";
-import Admin from "../../martial-arts-hub-frontend/src/components/pages/Admin/Admin"
+import Admin from "../src/components/pages/Admin/Admin"
 
 function App() {
   const navItem = [
