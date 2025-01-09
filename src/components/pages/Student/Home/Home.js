@@ -106,9 +106,9 @@ function Home() {
   }, [location]);
 
   const navigate = useNavigate();
-  const viewMore=()=>{
-    navigate("/Student_InstructorViewProfile")
-  }
+  const viewMore = () => {
+    navigate("/Student_InstructorViewProfile");
+  };
 
   return (
     <div>
@@ -423,7 +423,9 @@ function Home() {
                   <p>{item.text1}</p>
                   <p>{item.button1}</p>
 
-                  <button className="rounded-pill view" onClick={viewMore}>View Profile</button>
+                  <button className="rounded-pill view" onClick={viewMore}>
+                    View Profile
+                  </button>
                   <button className="rounded-pill view send">
                     Send a Message
                   </button>

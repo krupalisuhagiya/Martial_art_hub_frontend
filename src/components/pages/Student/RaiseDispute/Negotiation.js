@@ -2,16 +2,20 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import "./Negotiation.css";
 import { HiOutlineArrowLeft } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import classonlineimg14 from "../../../../image/14.png";
+import baseUrl from "../../../../baseUrl";
+import socket from "../../../../components/Socket";
+import axios from "axios";
+
 function Negotiation() {
   const navigate = useNavigate();
   const negotiationClick = () => {
     navigate("/DisputeStage1");
   };
+
   const [user, setUser] = useState("");
   const [messages, setMessages] = useState([]);
-  
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -22,75 +26,59 @@ function Negotiation() {
         setUser(storedUser);
       }
     }
-  }, []);
-
-  // -------------
-  useEffect(() => {
-    setMessages([
-      // {
-      //   type: "send",
-      //   msg: "Hello! I want to know about Brazilian Jiu Jitsu. In how much time I will learn it?",
-      //   user: user,
-      //   time: "July 23, 2024 at 05:43 IST",
-      // },
-      // {
-      //   type: "receive",
-      //   msg: "Yes, sure! This course, Learning Brazilian Jiu Jitsu, varies for each person. On average, it takes several months to a few years to become proficient.",
-      //   user: "Admin",
-      //   time: "July 23, 2024 at 05:55 IST",
-      // },
-    ]);
-  }, [user]);
+  }, [messages]);
   // -----------last message auto scrool
   const lastMessageRef = useRef(null);
   useEffect(() => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages]);
+  }, []);
+
+  // ----------------------socket-------------
+  const { roomid } = useParams();
+  const [message, setmessage] = useState("");
+  const [chatmessage, setchatmessage] = useState([]);
+  console.log(chatmessage, "===========>");
+
+  useEffect(() => {
+    const fetchChat = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/chat/data/student/admin`);
+        setchatmessage(response.data); // Assuming `response.data` contains the desired data
+        console.log(response.data, "===========>");
+      } catch (error) {
+        console.error("Error fetching chat messages:", error);
+      }
+    };
+
+    fetchChat();
+  }, []);
 
   const handleSendMessage = () => {
-    const inputElement = document.getElementById("writemessage");
-    const message = inputElement.value.trim();
-    if (message) {
-      const currentTime = new Date().toLocaleString("en-US", {
-        timeZone: "Asia/Kolkata",
-        month: "short",
-        day: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      });
-
-      // Add user message
-      setMessages((prev) => [
-        ...prev,
-        {
-          type: "send",
-          msg: message,
-          user: user,
-          time: currentTime,
-        },
-      ]);
-
-      // Add a simulated response
-      setTimeout(() => {
-        setMessages((prev) => [
-          ...prev,
-          {
-            type: "receive",
-            msg: "Thanks for your question! We will get back to you with more details shortly.",
-            user: "Admin",
-            time: `Admin ${currentTime}`,
-          },
-        ]);
-      }, 1000); // Simulated response delay
-
-      inputElement.value = ""; // Clear input field
-    }
+    socket.emit("Enterchat", {
+      message: message,
+      sender: "instructor",
+      time: new Date(),
+      roomid,
+    });
+    setmessage("");
   };
 
+  useEffect(() => {
+    socket.emit("joinRoom", roomid);
+
+    socket.on("getchatData", (data) => {
+      console.log(data, "instr");
+
+      setchatmessage((prev) => [...prev, data]);
+    });
+
+    return () => {
+      socket.off("getchatData");
+    };
+  }, []);
+  // ---------------------------------------------
   const negotiationpayment = [
     {
       total: "5.99",
@@ -169,46 +157,44 @@ function Negotiation() {
         <div className="student_stage2_chatmain">
           <div className="row">
             <div className="col-lg-9 student_stage2_chat">
-              <div className="student_stage2_chat1">
-                {messages.map((message, index) => (
-                  <div
+              {/* <div className="student_stage2_chat1">
+                {chatmessage.map((message, index) => (
+                  <div style={{marginBottom:"10px"}}
                     key={index}
                     ref={index === messages.length - 1 ? lastMessageRef : null}
                   >
                     {message.type === "send" ? (
-                      <div>
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "end",
-                          }}
-                        >
-                          <p className="send-msg0" id="send-msg0">
-                            {message.msg}
-                          </p>
-                          <span className="chatimg">
-                            {user && /^[A-Za-z]/.test(user)
-                              ? user.charAt(0).toUpperCase()
-                              : ""}
-                          </span>
-                        </div>
-                        <p className="student_stage2_chat_time">
-                          {message.time}
+                    <div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "end",
+                        }}
+                      >
+                        <p className="send-msg0" id="send-msg0">
+                          {message.message}
                         </p>
+                        <span className="chatimg">
+                          {user && /^[A-Za-z]/.test(user)
+                            ? user.charAt(0).toUpperCase()
+                            : ""}
+                        </span>
                       </div>
-                    ) : (
-                      <div>
+                      <p className="student_stage2_chat_time">{message.time}</p>
+                    </div>
+                    ) : ( 
+                  <div>
                         <div className="receivechat" id="receivechat">
                           {message.user === "Admin" ? (
                             <img src={classonlineimg14} alt="Admin" />
                           ) : null}
-                          <p>{message.msg}</p>
+                          <p>{message.message}</p>
                         </div>
                         <p className="student_stage2_chattime">
                           {message.time}
                         </p>
                       </div>
-                    )}
+                     )} 
                     <div className="type-check student_type_time">
                       <p
                         className={
@@ -228,6 +214,8 @@ function Negotiation() {
                     id="writemessage"
                     type="email"
                     placeholder="Write your message here"
+                    value={message}
+                    onChange={(e) => setmessage(e.target.value)}
                   />
                   <button
                     className="student_stage2_send"
@@ -235,6 +223,30 @@ function Negotiation() {
                   >
                     Send
                   </button>
+                </div>
+              </div> */}
+              <div>
+                <h3>Instructor</h3>
+                <input
+                  type="text"
+                  placeholder="Enter your message"
+                  value={message}
+                  onChange={(e) => setmessage(e.target.value)}
+                />
+                <button onClick={handleSendMessage}>Send</button>
+                <div>
+                  {chatmessage.map((item, index) => {
+                    return (
+                      <div>
+                        <span>{index}</span>
+                        <span>====</span>
+                        <span>{item.message}</span>
+                        <span>====</span>
+                        <span>{item.sender}</span>.<span>====</span>
+                        <span>{item.time}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

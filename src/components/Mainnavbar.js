@@ -15,7 +15,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 function Mainnavbar({ text }) {
   const dropdownItems = [
-    { name: "Dashboard", url: "/Dashboard" },
+    { name: "Dashboard", url: "/Dashheader" },
     { name: "My Profile", url: "/StudentProfile" },
     { name: "Messages", url: "/Messages" }, // Define the route for Messages
   ];

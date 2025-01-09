@@ -3,6 +3,7 @@ import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { LuLanguages } from "react-icons/lu";
 import { HiOutlineStatusOnline } from "react-icons/hi";
 import { LiaVectorSquareSolid } from "react-icons/lia";
+import { useLocation } from "react-router-dom";
 
 function InstructorViewProfile() {
   const experience = [
@@ -46,9 +47,12 @@ function InstructorViewProfile() {
     "Opened own dojo in 2010, focusing on personalized and group martial arts training",
     "Continuously attending seminars and workshops to stay updated with the latest martial arts techniques and teaching methods",
   ];
+  // ---------------col-3------------------
+  // const location = useLocation();
+  // const { item } = location.state;
   return (
     <div>
-      <div style={{paddingTop:"100px"}}> 
+      <div style={{ paddingTop: "100px" }}>
         <div className="row">
           <div className="col-md-9 div-col9">
             <div className="instuctore_profile_fourbutton">
@@ -95,7 +99,6 @@ function InstructorViewProfile() {
                 </button>
                 <button>
                   <LiaVectorSquareSolid className="statusOnline" />
-
                   All Levels
                 </button>
                 <button>
@@ -172,7 +175,20 @@ function InstructorViewProfile() {
               ))}
             </div>
           </div>
-          <div className="col-md-3"></div>
+          {/* <div className="col-md-3">
+            <img src={item.image} alt={item.head1} style={{ width: "100%" }} />
+            <div className="d-flex">
+              <div className="d-flex home-star">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i}>{item.star}</span>
+                ))}
+              </div>
+              <span>{item.number}</span>
+            </div>
+            <h3>{item.head1}</h3>
+            <p>{item.text1}</p>
+            <button className="rounded-pill send">Send a Message</button>
+          </div> */}
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@ import ResetPassword from "./components/pages/Student/MyProfile/Reset Password/R
 import FavoriteInstructors from "./components/pages/Student/MyProfile/Favorite Instructors/FavoriteInstructors";
 import BookingHistory from "./components/pages/Student/MyProfile/Booking History/BookingHistory";
 import InstructorViewProfile from "./components/pages/Student/InstructorViewProfile/InstructorViewProfile";
-
+import Admin from "../../martial-arts-hub-frontend/src/components/pages/Admin/Admin"
 
 function App() {
   const navItem = [
@@ -57,7 +57,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/Categories" element={<Categories />}></Route>
-        <Route path="/Dashboard" element={<Dashheader />} />
+        <Route path="/Dashheader" element={<Dashheader />} />
         <Route path="/Profile" element={<MyProfile />} />
         <Route path="/Messages" element={<MyMessages />} />
         <Route path="/MyClasses" element={<MyClasses />} />
@@ -67,7 +67,7 @@ function App() {
         <Route path="/RaiseDispute" element={<RaiseDispute />} />
         <Route path="/closed_disputes" element={<ClosedDisputes />} />
         <Route path="/DisputeStage1" element={<DisputeStage1 />} />
-        <Route path="/Negotiation" element={<Negotiation />} />
+        <Route path="/Negotiation/:roomid" element={<Negotiation />} />
         <Route path="/Arbitration" element={<Arbitration />} />
         <Route path="/StudentProfile" element={<StudentProfile />} />
         <Route path="/Student_login_details" element={<LogInDetails />} />
@@ -81,6 +81,9 @@ function App() {
         <Route path="/Instuctorsignup" element={<Instuctorsignup />} />
         <Route path="/MyProfileform" element={<MyProfileform />} />
         <Route path="/MyProfile" element={<MyProfile/>}></Route>
+
+        {/* --------------------------Admin------------------- ----------*/}
+        <Route path="/Admin" element={<Admin/>}></Route>
         
       </Routes>
     </div>

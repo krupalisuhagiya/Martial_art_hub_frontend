@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./Dashboard.css";
 const Dashboard = () => {
   const navLinks = [
-    { name: "Dashboard", url: "/Dashboard" },
+    { name: "Dashboard", url: "/Dashheader" },
     { name: "My Messages", url: "/Messages" },
     { name: "My Classes", url: "/MyClasses" },
     { name: "My Invoices", url: "/MyInvoices" },
