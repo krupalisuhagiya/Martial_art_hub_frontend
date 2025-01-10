@@ -1,0 +1,27 @@
+.student_InstructorViewProfile_container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.student_ins_profile_view {
+  width: 100%;
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+#student_InstructorViewProfile_download {
+  background-color: #646363;
+  padding: 50px 0;
+  margin-top: 15px;
+}
+.student_InstructorViewProfile_reviews {
+  border: 1px solid;
+  border-radius: 11px;
+  padding: 15px;
+}
+.student_InstructorViewProfile_reviews1 {
+    display: flex
+}
+.student_InstructorViewProfile_reviews1 img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}

@@ -680,9 +680,10 @@
 }
 .view {
   font-size: 13px;
-  padding: 4px 8px;
+  padding: 8px 8px;
   background-color: black;
   color: white;
+  width: 100%;
 }
 .div-heart {
   height: 30px;

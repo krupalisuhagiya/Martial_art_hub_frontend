@@ -16,7 +16,7 @@ import img18 from "../../../../image/18.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaArrowRightLong, FaStar } from "react-icons/fa6";
+import { FaArrowRightLong, FaRegStar, FaStar } from "react-icons/fa6";
 import { Accordion } from "react-bootstrap";
 import Footer from "../../../comman/Footer";
 import Slider1 from "../../../comman/Slider1";
@@ -58,7 +58,7 @@ function Home() {
   const imageData1 = [
     {
       image: img11,
-      star: <FaStar />,
+      star: 4,
       number: "4.3(1200 Ratings)",
       head1: "Jhon Martin",
       text1: "experience in 30 yesr of marshlat and also many filed......",
@@ -66,7 +66,7 @@ function Home() {
 
     {
       image: img12,
-      star: <FaStar />,
+      star: 3,
       number: "4.3(1200 Ratings)",
       head1: "B Parag",
       text1: "experience in 10 yesr of marshlat and also many filed......",
@@ -74,14 +74,14 @@ function Home() {
 
     {
       image: img13,
-      star: <FaStar />,
+      star: 2,
       number: "4.3(1200 Ratings)",
       head1: "Maxi Miliun",
       text1: "experience in 20 yesr of marshlat and also many filed......",
     },
     {
       image: img14,
-      star: <FaStar />,
+      star: 5,
       number: "4.3(1200 Ratings)",
       head1: "Kiya Jhon",
       text1: "experience in 20 yesr of marshlat and also many filed......",
@@ -104,10 +104,27 @@ function Home() {
       homeRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [location]);
+  // -----------------------------second page-----------
+  const renderStars = (rating) => {
+    const stars = [];
+    const filledStars = Math.floor(rating); // Full stars (yellow)
+    const emptyStars = 5 - filledStars; // Empty stars (grey)
 
+    // Add yellow stars
+    for (let i = 0; i < filledStars; i++) {
+      stars.push(<FaStar key={`full-${i}`} style={{ color: "#FFB423" }} />);
+    }
+
+    // Add grey stars
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(<FaStar key={`empty-${i}`} style={{ color: "#BCBCBC" }} />);
+    }
+
+    return stars;
+  };
   const navigate = useNavigate();
-  const viewMore = () => {
-    navigate("/Student_InstructorViewProfile");
+  const viewMore = (item) => {
+    navigate("/Student_InstructorViewProfile", { state: { item } });
   };
 
   return (
@@ -403,11 +420,12 @@ function Home() {
                   </div>
                   <div className="d-flex" style={{ marginTop: "8px" }}>
                     <div className="d-flex home-star">
+                      <span>{renderStars(item.star)}</span>
+                      {/* <span>{item.star}</span>
                       <span>{item.star}</span>
                       <span>{item.star}</span>
                       <span>{item.star}</span>
-                      <span>{item.star}</span>
-                      <span className="">{item.star}</span>
+                      <span className="">{item.star}</span> */}
                     </div>
                     <span
                       style={{
@@ -423,12 +441,15 @@ function Home() {
                   <p>{item.text1}</p>
                   <p>{item.button1}</p>
 
-                  <button className="rounded-pill view" onClick={viewMore}>
+                  <button
+                    className="rounded-pill view"
+                    onClick={() => viewMore(item)}
+                  >
                     View Profile
                   </button>
-                  <button className="rounded-pill view send">
+                  {/* <button className="rounded-pill view send">
                     Send a Message
-                  </button>
+                  </button> */}
                 </div>
               ))}
             </Slider>
